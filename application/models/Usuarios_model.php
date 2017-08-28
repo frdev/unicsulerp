@@ -27,11 +27,29 @@ class Usuarios_model extends CI_Model
 		}
 	}
 
+	public function getLogin($usuario=NULL, $senha=NULL)
+	{
+		if($usuario != NULL && $senha != NULL)
+		{
+			$this->db->where('usuario', $usuario);
+			$this->db->where('senha', $senha);
+			$this->db->limit(1);
+			$query = $this->db->get('usuarios');
+			return $query->result();
+		}
+	}
+
 	public function editUsuario($dados=NULL, $id=NULL)
 	{
 		if($dados != NULL && $id != NULL){
-			$data = array('nome' => $dados['nome'], 'usuario' => $dados['usuario'], 'senha' => $dados['senha'], $email => $dados['email'], $permissao => $dados['permissao'], $status => $dados['status'],  'modificado' => $dados['modificado']);
-			$this->db->update('usuarios', $data, array('id' => $id));
+			$this->db->update('usuarios', $dados, array('id' => $id));
+		}
+	}
+
+	public function apagarUsuario($id=NULL){
+		if($id != NULL)
+		{
+			$this->db->delete('usuarios', array('id' => $id));
 		}
 	}
 

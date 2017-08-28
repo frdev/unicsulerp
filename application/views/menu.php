@@ -19,10 +19,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="/ci/bootstrap/css/sticky-footer.css" rel="stylesheet">
+    <link href="/erp/bootstrap/css/sticky-footer.css" rel="stylesheet">
 
     <!-- Font awesome -->
-    <link href="/ci/awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/erp/awesome/css/font-awesome.min.css" rel="stylesheet">
 
   </head>
 
@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('');?>">Dashboard<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?=base_url('produtos/painel');?>">Em falta<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('produtos/listarprodutos');?>">Estoque</a>

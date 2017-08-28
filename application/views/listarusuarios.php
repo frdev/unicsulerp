@@ -56,10 +56,9 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		<thead class="table-inverse">
 			<tr>
 				<td class='text-center'><b>Usuário</b></td>
+				<td class='text-center'><b>E-mail</b></td>
 				<td class='text-center'><b>Permissão</b></td>
 				<td class='text-center'><b>Status</b></td>
-				<td class='text-center'><b>Criado</b></td>
-				<td class='text-center'><b>Modificado </b></td>
 				<td class='text-center'><b>Ações</b></td>
 			</tr>
 		</thead>
@@ -68,7 +67,8 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$contador = 0;
 			foreach ($usuarios as $usuario): ?>
 			<tr>
-				<td class='text-center'><?=$usuario->usuario;?></td>
+				<td class='text-center'><?=$usuario->nome;?></td>
+				<td class='text-center'><?=$usuario->email;?></td>
 				<?php
 				if($usuario->permissao == 10):
 					echo "<td class='text-center'>Administrador</td>";
@@ -83,16 +83,6 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					"<td class='text-center'>Inativo</td>";
 				endif;
 				?>
-				<td class='text-center'><?=$usuario->criado;?></td>
-				<td class='text-center'>
-				<?php
-					if($usuario->modificado == NULL){
-						echo '-';
-					} else {
-						echo $usuario->modificado;
-					}
-				?>
-				</td>
 				<td class='text-center'>
 				<a class="btn btn-sm btn-primary" href="<?=base_url('/usuarios/info/' . $usuario->id)?>"><i class="fa fa-info" aria-hidden="true"></i></a>
 				<a class="btn btn-sm btn-warning" href="<?=base_url('/usuarios/editar/' . $usuario->id)?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>

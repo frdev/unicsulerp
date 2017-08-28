@@ -7,7 +7,7 @@ class Produtos extends CI_Controller
 	public function index()
 	{
 		$this->load->view('menu');
-		$this->load->view('index');
+		$this->load->view('painel');
 		$this->load->view('rodape');
 	}
 
@@ -45,6 +45,13 @@ class Produtos extends CI_Controller
 				redirect($url);
 			}
 		}
+	}
+
+	public function painel()
+	{
+		$this->load->view('menu');
+		$this->load->view('painel');
+		$this->load->view('rodape');
 	}
 
 	public function editar($id=NULL){
