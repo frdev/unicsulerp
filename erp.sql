@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Set-2017 às 02:45
+-- Generation Time: 04-Set-2017 às 17:05
 -- Versão do servidor: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -48,7 +48,8 @@ CREATE TABLE `compras` (
 INSERT INTO `compras` (`id`, `id_produto`, `id_fornecedor`, `id_usuario`, `qtd`, `valor`, `status`, `datasolicitacao`, `dataaprovado`, `dataentregue`) VALUES
 (1, 2, 2, 1, 50, '900.00', 4, '2017-09-03', '2017-09-04', '2017-09-04'),
 (2, 3, 2, 2, 16, '200.00', 4, '2017-09-04', '2017-09-04', '2017-09-04'),
-(3, 3, 3, 1, 15, '300', 0, '2017-09-04', NULL, NULL);
+(3, 3, 3, 1, 15, '300', 0, '2017-09-04', NULL, NULL),
+(4, 3, 2, 1, 2, '200', 4, '2017-09-04', '2017-09-04', '2017-09-04');
 
 -- --------------------------------------------------------
 
@@ -84,6 +85,28 @@ INSERT INTO `fornecedores` (`id`, `cnpj`, `razaosocial`, `fantasia`, `responsave
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `historico`
+--
+
+CREATE TABLE `historico` (
+  `id` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `movimentacao` varchar(20) NOT NULL,
+  `qtd` int(11) NOT NULL,
+  `data` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `historico`
+--
+
+INSERT INTO `historico` (`id`, `id_produto`, `movimentacao`, `qtd`, `data`) VALUES
+(1, 1, 'Venda', 2, '2017-09-04'),
+(2, 3, 'Compra', 2, '2017-09-04');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `produtos`
 --
 
@@ -104,9 +127,21 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id`, `descricao`, `tipo`, `status`, `preco`, `qtd`, `acionamento`, `min`, `max`) VALUES
-(1, 'teste', '0', 1, 50, 18, 9, 3, 15),
+(1, 'teste', '0', 1, 50, 4, 9, 3, 15),
 (2, 'teste1', '1', 1, 20, 114, 15, 10, 30),
-(3, 'teste2', '2', 1, 30, 14, 15, 12, 30);
+(3, 'teste2', '2', 1, 30, 16, 15, 12, 30);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `reposicoes`
+--
+
+CREATE TABLE `reposicoes` (
+  `id` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `qtd` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -156,7 +191,8 @@ CREATE TABLE `vendas` (
 INSERT INTO `vendas` (`id`, `id_produto`, `qtd`, `status`, `datasolicitacao`, `dataaprovada`) VALUES
 (1, 1, 20, 0, '2017-09-04', NULL),
 (2, 1, 1, 2, '2017-09-04', '2017-09-04'),
-(3, 1, 2, 2, '2017-09-04', '2017-09-04');
+(3, 1, 2, 2, '2017-09-04', '2017-09-04'),
+(4, 1, 2, 2, '2017-09-04', '2017-09-04');
 
 --
 -- Indexes for dumped tables
@@ -181,10 +217,24 @@ ALTER TABLE `fornecedores`
   ADD UNIQUE KEY `cnpj` (`cnpj`);
 
 --
+-- Indexes for table `historico`
+--
+ALTER TABLE `historico`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_produto_historico` (`id_produto`);
+
+--
 -- Indexes for table `produtos`
 --
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reposicoes`
+--
+ALTER TABLE `reposicoes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_produto_reposicao` (`id_produto`);
 
 --
 -- Indexes for table `usuarios`
@@ -207,17 +257,27 @@ ALTER TABLE `vendas`
 -- AUTO_INCREMENT for table `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `fornecedores`
 --
 ALTER TABLE `fornecedores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `historico`
+--
+ALTER TABLE `historico`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `reposicoes`
+--
+ALTER TABLE `reposicoes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
@@ -227,7 +287,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
@@ -239,6 +299,18 @@ ALTER TABLE `compras`
   ADD CONSTRAINT `fk_fornecedor` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedores` (`id`),
   ADD CONSTRAINT `fk_produto` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`),
   ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
+--
+-- Limitadores para a tabela `historico`
+--
+ALTER TABLE `historico`
+  ADD CONSTRAINT `fk_produto_historico` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`);
+
+--
+-- Limitadores para a tabela `reposicoes`
+--
+ALTER TABLE `reposicoes`
+  ADD CONSTRAINT `fk_produto_reposicao` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`);
 
 --
 -- Limitadores para a tabela `vendas`
