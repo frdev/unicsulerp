@@ -19,10 +19,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="/erp/bootstrap/css/sticky-footer.css" rel="stylesheet">
+    <link href="/unicsulerp/bootstrap/css/sticky-footer.css" rel="stylesheet">
 
     <!-- Font awesome -->
-    <link href="/erp/awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/unicsulerp/awesome/css/font-awesome.min.css" rel="stylesheet">
 
   </head>
 
@@ -35,16 +35,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Estoque</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="<?=base_url('usuarios/listarusuarios')?>">Usuários</a>
+              <a class="dropdown-item" href="<?=base_url('usuarios/listarusuarios')?>">Usuários</a>
+              <a class="dropdown-item" href="<?=base_url('produtos/listarprodutos')?>">Produtos</a>
+              <a class="dropdown-item" href="<?=base_url('fornecedores/index')?>">Fornecedores</a>
+              <a class="dropdown-item" href="<?=base_url('reposicoes/index')?>">Solicitações de Reposição</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Compras</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="<?=base_url('compras/index')?>">Solicitações de Compras</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vendas</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="<?=base_url('vendas/index')?>">Solicitações de Vendas</a>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('produtos/painel');?>">Em falta<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?=base_url('produtos/inventario');?>">Inventário<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('produtos/listarprodutos');?>">Estoque</a>
+            <a class="nav-link" href="<?=base_url('produtos/painel');?>">Em falta<span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>

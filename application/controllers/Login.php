@@ -29,12 +29,9 @@ class Login extends CI_Controller
 		{
 			redirect(base_url(''));
 		} else {
-			print_r($query);
-			$id = "";
-			$u = "";
 			$user = array('id' => $id, 'usuario' => $u, 'logado' => TRUE);
 			$this->session->set_userdata($user);
-			print_r($user);
+			redirect(base_url('produtos/listarprodutos'));
 		}
 
 	}

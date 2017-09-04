@@ -19,10 +19,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="/erp/bootstrap/css/sticky-footer.css" rel="stylesheet">
+    <link href="/unicsulerp/bootstrap/css/sticky-footer.css" rel="stylesheet">
 
     <!-- Font awesome -->
-    <link href="/erp/awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/unicsulerp/awesome/css/font-awesome.min.css" rel="stylesheet">
 
   </head>
   	<body>

@@ -43,4 +43,12 @@ class Produtos_model extends CI_Model
 		}
 	}
 
+	public function atualizarQtd($id=NULL, $qtd=NULL)
+	{
+		if($id != NULL && $qtd != NULL)
+		{
+			$this->db->update('produtos', array('qtd' => $qtd), array('id' => $id));
+		}
+	}
+
 }

@@ -30,6 +30,8 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 	<p>R$ <?=$produto->preco;?></p>
 	<h4>Quantidade</h4>
 	<p><?=$produto->qtd;?></p>
+	<h4>Ponto de acionamento</h4>
+	<p><?=$produto->acionamento;?></p>
 	<h4>Valor total em estoque</h4>
 	<p>R$ <?=($produto->qtd*$produto->preco);?></p>
 	<a href="<?=base_url('produtos/listarprodutos')?>" class="btn btn-md btn-dark">Voltar</a>

@@ -34,6 +34,7 @@ class Produtos extends CI_Controller
 			$dados['status'] = $this->input->post('status');
 			$dados['preco'] = $this->input->post('preco');
 			$dados['qtd'] = $this->input->post('qtd');
+			$dados['acionamento'] = $this->input->post('acionamento');
 			$dados['min'] = $this->input->post('qtdmin');
 			$dados['max'] = $this->input->post('qtdmax');
 
