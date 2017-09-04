@@ -154,7 +154,9 @@ class Compras extends CI_Controller
 			redirect($url);
 		}
 
+		//carrega a model compras
 		$this->load->model('compras_model', 'compras');
+		//pega o id da compra
 		$query = $this->compras->getCompraByID($id);
 
 		if($query == NULL)
@@ -162,14 +164,34 @@ class Compras extends CI_Controller
 			redirect($url);
 		}
 
+		//carrega a model produtos
 		$this->load->model('produtos_model', 'produtos');
+		//pega a query do produto pelo id do produto na compra
 		$qp = $this->produtos->getProdutoByID($query->id_produto);
 
-		$qtd = $query->qtd + $qp->qtd;
+		//carrega a model historico
+		$this->load->model('historico_model', 'historico');
 
+		//Inicializa uma variável com a quantidade atual
+		$qtd = $query->qtd + $qp->qtd;
+		//pega data atual
 		$data = date('Y-m-d');
+
+		//pega os elementos para realizar a inserção no historico
+		$dados['id_produto'] = $query->id_produto;
+		$dados['movimentacao'] = 'Compra';
+		$dados['qtd'] = $query->qtd;
+		$dados['data'] = $data;
+
+		//atualiza o status da compra para entregue com a data atual pelo $id
 		$this->compras->recebeEntrega($id, $data);
+		//atualiza a quantidade de produtos
 		$this->produtos->atualizarQtd($qp->id, $qtd);
+
+		//insere o histórico
+		$this->historico->addHistorico($dados);
+
+		//redireciona
 		redirect($url);
 	}
 

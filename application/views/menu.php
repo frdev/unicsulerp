@@ -40,19 +40,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a class="dropdown-item" href="<?=base_url('usuarios/listarusuarios')?>">Usuários</a>
               <a class="dropdown-item" href="<?=base_url('produtos/listarprodutos')?>">Produtos</a>
               <a class="dropdown-item" href="<?=base_url('fornecedores/index')?>">Fornecedores</a>
-              <a class="dropdown-item" href="<?=base_url('reposicoes/index')?>">Solicitações de Reposição</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Compras</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="<?=base_url('compras/index')?>">Solicitações de Compras</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vendas</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="<?=base_url('vendas/index')?>">Solicitações de Vendas</a>
+              <a class="dropdown-item" href="<?=base_url('producoes/index')?>">Solicitações de Produções</a>
+              <a class="dropdown-item" href="<?=base_url('reposicoes/index')?>">Solicitações de Usuários</a>
+              <a class="dropdown-item" href="<?=base_url('historico/index')?>">Histórico de movimentações</a>
             </div>
           </li>
           <li class="nav-item">
