@@ -122,5 +122,4 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		</tbody>
 	</table>
 	<p class="text-center"><b>Total de registros: <?=$contador;?></b></p>
-
 </div>

@@ -17,6 +17,23 @@ class Usuarios_model extends CI_Model
 		}
 	}
 
+	public function checkUsuario($dados=NULL)
+	{
+		
+		$nome = $dados['nome'];
+		$usuario = $dados['usuario'];
+		$email = $dados['email'];
+
+		if($dados != NULL)
+		{
+			$this->db->where('nome', $nome);
+			$this->db->or_where('usuario =', $usuario);
+			$this->db->or_where('email =', $email);
+			$query = $this->db->get('usuarios');
+		}
+		return $query->row();
+	}
+
 	public function getUsuarioByID($id=NULL){
 		if($id != NULL)
 		{

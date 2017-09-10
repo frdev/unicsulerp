@@ -108,6 +108,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		?>
 			<a href="<?=base_url('compras/receberentrega/' . $compra->id)?>" class="btn btn-md btn-secondary">Receber Entrega</a>
 		<?php } ?>
-		<a style="margin-left: 1.5%;" href="<?=base_url('compras/index')?>" class="btn btn-md btn-light">Voltar</a>
+		<a style="margin-left: 1.5%;" href="<?=base_url('compras/index')?>" class="btn btn-md btn-secondary">Voltar</a>
 	</div>
 </div>

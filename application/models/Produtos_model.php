@@ -27,6 +27,16 @@ class Produtos_model extends CI_Model
 		}
 	}
 
+	public function checkProduto($descricao=NULL)
+	{
+		if($descricao != NULL)
+		{
+			$this->db->where('descricao', $descricao);
+			$query = $this->db->get('produtos');
+		}
+		return $query->row();
+	}
+
 	public function editarProduto($dados=NULL, $id=NULL)
 	{
 		if($dados != NULL && $id != NULL)

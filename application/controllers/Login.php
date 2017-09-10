@@ -24,16 +24,20 @@ class Login extends CI_Controller
 		$this->load->model('usuarios_model', 'usuarios');
 
 		$query = $this->usuarios->getLogin($usuario, $senha);
+		$e = $query['email'];
+		$s = $query['senha'];
 
 		if($query == NULL)
 		{
 			redirect(base_url(''));
 		} else {
-			$user = array('id' => $id, 'usuario' => $u, 'logado' => TRUE);
-			$this->session->set_userdata($user);
 			redirect(base_url('produtos/listarprodutos'));
 		}
+	}
 
+	public function logout()
+	{
+		redirect(base_url(''));
 	}
 
 }

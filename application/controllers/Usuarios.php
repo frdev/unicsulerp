@@ -33,8 +33,12 @@ class Usuarios extends CI_Controller
 				$this->usuarios->editUsuario($dados, $this->input->post('id'));
 				redirect($url);
 			} else {
-				$this->usuarios->addUsuario($dados);
-				redirect($url);
+				if($this->usuarios->checkUsuario($dados) < 1){				
+					$this->usuarios->addUsuario($dados);
+					redirect($url);
+				} else {
+					redirect($url);
+				}
 			}
 		}
 	}

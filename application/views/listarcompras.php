@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <br>
 <div class="container">
+	<br>
 	<h1 class="text-center">Solicitações de Compras</h1>
 	<hr>
 

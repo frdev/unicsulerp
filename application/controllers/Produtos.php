@@ -38,12 +38,21 @@ class Produtos extends CI_Controller
 			$dados['min'] = $this->input->post('qtdmin');
 			$dados['max'] = $this->input->post('qtdmax');
 
+			$descricao = $this->input->post('descricao');
+
 			if($this->input->post('id') != NULL){
 				$this->produtos->editarProduto($dados, $this->input->post('id'));
 				redirect($url);
 			} else {
-				$this->produtos->addProduto($dados);
-				redirect($url);
+				$query = $this->produtos->checkProduto($descricao);
+				if($query == NULL)
+				{
+					$this->produtos->addProduto($dados);
+					redirect($url);
+				} else 
+				{
+					redirect($url);
+				}	
 			}
 		}
 	}

@@ -48,10 +48,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('produtos/inventario');?>">Inventário<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?=base_url('produtos/inventario');?>">Inventário</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=base_url('produtos/painel');?>">Em falta<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?=base_url('produtos/painel');?>">Em falta</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url('login/logout');?>">Sair</a>
           </li>
         </ul>
       </div>
