@@ -76,13 +76,17 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 				if($usuario->permissao == 20):
 					echo "<td class='text-center'>Comum</td>";
 				endif;
+				?>
+				<td class='text-center'>
+				<?php
 				if($usuario->status == 1):
-					echo "<td class='text-center'>Ativo</td>";
+					echo "Ativo";
 				endif;
 				if($usuario->status == 0):
-					"<td class='text-center'>Inativo</td>";
+					echo "Inativo";
 				endif;
 				?>
+				</td>
 				<td class='text-center'>
 				<a class="btn btn-sm btn-primary" href="<?=base_url('/usuarios/info/' . $usuario->id)?>"><i class="fa fa-info" aria-hidden="true"></i></a>
 				<a class="btn btn-sm btn-warning" href="<?=base_url('/usuarios/editar/' . $usuario->id)?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>

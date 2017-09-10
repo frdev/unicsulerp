@@ -30,15 +30,29 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 				<div class="form-group col-md-2">
 					<label for="permissao">Permissão</label>
 					<select class="form-control" id="permissao" name="permissao" required>
-						<option value='20'>Comum</option>
-						<option value='10'>Admin</option>
+						<?php
+						if($usuario->permissao == 20){
+							echo "<option value='20' selected>Comum</option>";
+							echo "<option value='10'>Admin</option>";
+						} else {
+							echo "<option value='20'>Comum</option>";
+							echo "<option value='10' selected>Admin</option>";
+						}
+						?>
 					</select>
 				</div>
 				<div class="form-group col-md-2">
 					<label for="status">Status</label>
 					<select class="form-control" id="status" name="status" required>
-						<option value='1'>Ativo</option>
-						<option value='0'>Inativo</option>
+						<?php
+						if($usuario->status == 1){
+							echo "<option value='1' selected>Ativo</option>";
+							echo "<option value='0'>Inativo</option>";
+						} else {
+							echo "<option value='1'>Ativo</option>";
+							echo "<option value='0' selected>Inativo</option>";
+						}
+						?>
 					</select>
 				</div>
 				<div class="form-group col-md-4" style="margin-top: 2.5%;">
