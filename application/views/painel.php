@@ -19,21 +19,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<tr>
 								<td>Produto</td>
 								<td>Qtd (-)</td>
+								<td class="text-center">Ação</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>Produto 1</td>
 								<td class="text-danger">5</td>
+								<td class="text-center"><a href="#" class="btn btn-sm btn-primary">Produção</a></td>
 							</tr>
 							<tr>
 								<td>Produto 2</td>
 								<td class="text-danger">3</td>
+								<td class="text-center"><a href="#" class="btn btn-sm btn-primary">Produção</a></td>
 							</tr>
 						</tbody>
 						</table>
 					</p>
-					<a href="#" class="btn btn-primary">Solicitar Produção</a>
 				</div>
 			</div>
 		</div>
@@ -48,25 +50,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<tr>
 								<td>Matéria-prima</td>
 								<td>Qtd (-)</td>
+								<td class="text-center">Ação</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>Materia 1</td>
 								<td class="text-danger">5</td>
+								<td class="text-center"><a href="#" class="btn btn-sm btn-primary">Comprar</a></td>
 							</tr>
 							<tr>
 								<td>Materia 2</td>
 								<td class="text-danger">2</td>
+								<td class="text-center"><a href="#" class="btn btn-sm btn-primary">Comprar</a></td>
 							</tr>
 							<tr>
 								<td>Materia 3</td>
 								<td class="text-danger">1</td>
+								<td class="text-center"><a href="#" class="btn btn-sm btn-primary">Comprar</a></td>
 							</tr>
 						</tbody>
 						</table>
 					</p>
-					<a href="#" class="btn btn-primary">Solicitar Compra</a>
 				</div>
 			</div>
 		</div>
@@ -81,17 +86,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<tr>
 								<td>Insumo</td>
 								<td>Qtd (-)</td>
+								<td class="text-center">Ação</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>Insumo 1</td>
 								<td class="text-danger">4</td>
+								<td class="text-center"><a href="#" class="btn btn-sm btn-primary">Comprar</a></td>
 							</tr>
 						</tbody>
 						</table>
 					</p>
-					<a href="#" class="btn btn-primary">Solicitar Compra</a>
 				</div>
 			</div>
 		</div>

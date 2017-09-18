@@ -40,6 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a class="dropdown-item" href="<?=base_url('usuarios/listarusuarios')?>">Usuários</a>
               <a class="dropdown-item" href="<?=base_url('produtos/listarprodutos')?>">Produtos</a>
               <a class="dropdown-item" href="<?=base_url('fornecedores/index')?>">Fornecedores</a>
+              <a class="dropdown-item" href="<?=base_url('departamentos/index')?>">Departamentos</a>
               <a class="dropdown-item" href="<?=base_url('compras/index')?>">Solicitações de Compras</a>
               <a class="dropdown-item" href="<?=base_url('vendas/index')?>">Solicitações de Vendas</a>
               <a class="dropdown-item" href="<?=base_url('producoes/index')?>">Solicitações de Produções</a>
