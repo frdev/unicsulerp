@@ -35,17 +35,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Estoque</a>
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="<?=base_url('usuarios/listarusuarios')?>">Usuários</a>
               <a class="dropdown-item" href="<?=base_url('produtos/listarprodutos')?>">Produtos</a>
               <a class="dropdown-item" href="<?=base_url('fornecedores/index')?>">Fornecedores</a>
               <a class="dropdown-item" href="<?=base_url('departamentos/index')?>">Departamentos</a>
-              <a class="dropdown-item" href="<?=base_url('compras/index')?>">Solicitações de Compras</a>
-              <a class="dropdown-item" href="<?=base_url('vendas/index')?>">Solicitações de Vendas</a>
-              <a class="dropdown-item" href="<?=base_url('producoes/index')?>">Solicitações de Produções</a>
-              <a class="dropdown-item" href="<?=base_url('reposicoes/index')?>">Solicitações de Usuários</a>
+              <a class="dropdown-item" href="<?=base_url('armazens/index')?>">Armazéns</a>
+              <a class="dropdown-item" href="<?=base_url('setores/index')?>">Setores</a>
               <a class="dropdown-item" href="<?=base_url('historico/index')?>">Histórico de movimentações</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitações</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="<?=base_url('compras/index')?>">Compras</a>
+              <a class="dropdown-item" href="<?=base_url('vendas/index')?>">Vendas</a>
+              <a class="dropdown-item" href="<?=base_url('producoes/index')?>">Produções</a>
+              <a class="dropdown-item" href="<?=base_url('reposicoes/index')?>">Reposições de Usuários</a>
             </div>
           </li>
           <li class="nav-item">

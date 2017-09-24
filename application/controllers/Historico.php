@@ -19,10 +19,9 @@ class Historico extends CI_Controller
 		$dados['produtos'] = $this->produtos->getProdutos();
 
 		//chama a view listarhistorico passando os dados do array pro parametro
-		$this->load->view('listarhistorico', $dados);
+		$this->load->view('historico/listarhistorico', $dados);
 		$this->load->view('rodape');
 	}
-
 
 
 }

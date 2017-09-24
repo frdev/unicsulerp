@@ -9,7 +9,7 @@ class Fornecedores extends CI_Controller
 		$this->load->view('menu');
 		$this->load->model('fornecedores_model', 'fornecedores');
 		$data['fornecedores'] = $this->fornecedores->getFornecedores();
-		$this->load->view('listarfornecedores', $data);
+		$this->load->view('fornecedor/listarfornecedores', $data);
 		$this->load->view('rodape');
 	}
 
@@ -62,7 +62,7 @@ class Fornecedores extends CI_Controller
 		$dados['fornecedor'] = $query;
 
 		$this->load->view('menu');
-		$this->load->view('infofornecedor', $dados);
+		$this->load->view('fornecedor/infofornecedor', $dados);
 		$this->load->view('rodape');
 	}
 
@@ -87,7 +87,7 @@ class Fornecedores extends CI_Controller
 		$dados['fornecedor'] = $query;
 
 		$this->load->view('menu');
-		$this->load->view('editarfornecedor', $dados);
+		$this->load->view('fornecedor/editarfornecedor', $dados);
 		$this->load->view('rodape');
 	}
 

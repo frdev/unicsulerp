@@ -9,7 +9,7 @@ class Departamentos extends CI_Controller
 		$this->load->model("departamentos_model", "departamentos");
 		$dados['departamentos'] = $this->departamentos->getDepartamentos();
 		$this->load->view("menu");
-		$this->load->view("listardepartamentos", $dados);
+		$this->load->view("departamento/listardepartamentos", $dados);
 		$this->load->view("rodape");
 	}
 
@@ -44,15 +44,12 @@ class Departamentos extends CI_Controller
 
 		if($query == NULL)
 		{
-			echo "<pre>";
-			print_r($query);
-			echo "</pre>";
-			//redirect(base_url('departamentos/index'));
+			redirect(base_url('departamentos/index'));
 		}
 
 		$dados['departamento'] = $query;
 		$this->load->view("menu");
-		$this->load->view("editardepartamento", $dados);
+		$this->load->view("departamento/editardepartamento", $dados);
 		$this->load->view("rodape");
 	}
 
@@ -66,7 +63,7 @@ class Departamentos extends CI_Controller
 		$data['descricao'] = $this->input->post('descricao');
 		$data['status'] = $this->input->post('status');
 		$this->load->model("departamentos_model", "departamentos");
-		$query = $this->departamentos->editDepartamento($data);
+		$query = $this->departamentos->editDepartamento($data, $this->input->post('idantigo'));
 		redirect(base_url('departamentos/index'));
 	}
 

@@ -14,7 +14,7 @@ class Reposicoes extends CI_Controller
 		$this->load->model("departamentos_model", "departamentos");
 		$dados['departamentos'] = $this->departamentos->getDepartamentos();
 		$this->load->view('menu');
-		$this->load->view('listarreposicoes', $dados);
+		$this->load->view('reposicao/listarreposicoes', $dados);
 		$this->load->view('rodape');
 	}
 

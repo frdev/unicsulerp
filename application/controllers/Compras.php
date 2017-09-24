@@ -14,7 +14,7 @@ class Compras extends CI_Controller
 		$query = $this->compras->getCompras();
 		$dados['compras'] = $query;
 		$dados['produtos'] = $qp;
-		$this->load->view('listarcompras', $dados);
+		$this->load->view('compra/listarcompras', $dados);
 		$this->load->view('rodape');
 	}
 
@@ -47,7 +47,7 @@ class Compras extends CI_Controller
 
 
 		$this->load->view('menu');
-		$this->load->view('compraproduto', $dados);
+		$this->load->view('compra/compraproduto', $dados);
 		$this->load->view('rodape');
 	}
 
@@ -96,7 +96,7 @@ class Compras extends CI_Controller
 		$dados['usuarios'] = $qu;
 
 		$this->load->view('menu');
-		$this->load->view('infocompra', $dados);
+		$this->load->view('compra/infocompra', $dados);
 		$this->load->view('rodape');
 	}
 

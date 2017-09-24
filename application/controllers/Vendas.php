@@ -11,7 +11,7 @@ class Vendas extends CI_Controller
 		$dados['vendas'] = $this->vendas->getVendas();
 		$this->load->model('produtos_model', 'produtos');
 		$dados['produtos'] = $this->produtos->getProdutos();
-		$this->load->view('listarvendas', $dados);
+		$this->load->view('venda/listarvendas', $dados);
 		$this->load->view('rodape');
 	}
 
@@ -51,7 +51,7 @@ class Vendas extends CI_Controller
 		$dados['produto'] = $qp;
 
 		$this->load->view('menu');
-		$this->load->view('infovenda', $dados);
+		$this->load->view('venda/infovenda', $dados);
 		$this->load->view('rodape');
 
 	}

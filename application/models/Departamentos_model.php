@@ -30,14 +30,12 @@ class Departamentos_model extends CI_Model
 		}
 	}
 
-	public function editDepartamento($dados=NULL)
+	public function editDepartamento($dados=NULL, $idold=NULL)
 	{
 		if($dados != NULL)
 		{
-			$id = $dados['id'];
-			$query = $this->db->update('departamentos', $dados, array('id' => $id));
+			$query = $this->db->update('departamentos', $dados, array('id' => "$idold"));
 		}
-			return $query;
 	}
 
 	public function apagarDepartamento($id=NULL)

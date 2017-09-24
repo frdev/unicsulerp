@@ -12,7 +12,7 @@ class Usuarios extends CI_Controller
 		$data['usuarios'] = $this->usuarios->getUsuarios();
 		//print_r($data);
 		//echo "</pre>";
-		$this->load->view('listarusuarios', $data);
+		$this->load->view('usuario/listarusuarios', $data);
 		$this->load->view('rodape');
 	}
 
@@ -60,7 +60,7 @@ class Usuarios extends CI_Controller
 		{
 			$data['usuario'] = $query;
 			$this->load->view('menu');
-			$this->load->view('infousuario', $data);
+			$this->load->view('usuario/infousuario', $data);
 			$this->load->view('rodape');
 		}
 
@@ -109,7 +109,7 @@ class Usuarios extends CI_Controller
 		$dados['usuario'] = $query;
 
 		$this->load->view('menu');
-		$this->load->view('editarusuario', $dados);
+		$this->load->view('usuario/editarusuario', $dados);
 		$this->load->view('rodape');
 	}
 

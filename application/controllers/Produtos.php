@@ -7,7 +7,7 @@ class Produtos extends CI_Controller
 	public function index()
 	{
 		$this->load->view('menu');
-		$this->load->view('painel');
+		$this->load->view('produto/painel');
 		$this->load->view('rodape');
 	}
 
@@ -17,7 +17,7 @@ class Produtos extends CI_Controller
 		$this->load->view('menu');
 		$this->load->model('produtos_model', 'produtos');
 		$data['produtos'] = $this->produtos->getProdutos();
-		$this->load->view('listarprodutos', $data);
+		$this->load->view('produto/listarprodutos', $data);
 		$this->load->view('rodape');
 	}
 
@@ -60,7 +60,7 @@ class Produtos extends CI_Controller
 	public function painel()
 	{
 		$this->load->view('menu');
-		$this->load->view('painel');
+		$this->load->view('produto/painel');
 		$this->load->view('rodape');
 	}
 
@@ -82,7 +82,7 @@ class Produtos extends CI_Controller
 		$dados['produto'] = $query;
 
 		$this->load->view('menu');
-		$this->load->view('editarproduto', $dados);
+		$this->load->view('produto/editarproduto', $dados);
 		$this->load->view('rodape');
 	}
 
@@ -120,7 +120,7 @@ class Produtos extends CI_Controller
 		} else {
 			$dados['produto'] = $query;
 			$this->load->view('menu');
-			$this->load->view('infoproduto', $dados);
+			$this->load->view('produto/infoproduto', $dados);
 			$this->load->view('rodape');
 		}
 
