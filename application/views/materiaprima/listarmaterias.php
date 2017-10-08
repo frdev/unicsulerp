@@ -16,6 +16,9 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
   				<li class="nav-item">
     				<a href="<?=base_url('materiasprima/listarconsumos');?>" class='btn btn-md btn-light'>Consumos</a>
     			</li>
+    			<li class="nav-item" style="margin-left: 10px;">
+    				<a href="<?=base_url('historico/index');?>" class='btn btn-md btn-light'>Histórico</a>
+    			</li>
 			</ul>
 		</div>
 		<!--PRODUTO ACABADO-->

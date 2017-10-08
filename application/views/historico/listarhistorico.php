@@ -5,6 +5,23 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 <div class="container">
     <br>
+    <div class="col-12">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="<?=base_url('produtos/listarprodutos');?>" class='btn btn-md btn-light'>Produtos Acabados</a>
+            </li>
+            <li class="nav-item" style="margin-left: 10px; margin-right: 10px">
+                <a href="<?=base_url('materiasprima/listarmaterias');?>" class='btn btn-md btn-light'>Matérias-prima</a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url('materiasprima/listarconsumos');?>" class='btn btn-md btn-light'>Consumos</a>
+            </li>
+            <li class="nav-item" style="margin-left: 10px;">
+                <a href="<?=base_url('historico/index');?>" class='btn btn-md btn-light active'>Histórico</a>
+            </li>
+        </ul>
+    </div>
+    <br>
     <h1 class='text-center'>Histórico</h1>
     <hr>
     <table class="table table-bordered">
