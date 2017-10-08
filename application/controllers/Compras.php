@@ -7,47 +7,14 @@ class Compras extends CI_Controller
 	public function index()
 	{
 		$this->load->view('menu');
-		$this->load->model('produtos_model', 'produtos');
+		$this->load->model('materiasprima_model', 'materias');
 		$this->load->model('compras_model', 'compras');
-
-		$qp = $this->produtos->getProdutos();
 		$query = $this->compras->getCompras();
 		$dados['compras'] = $query;
-		$dados['produtos'] = $qp;
+		$dados['materias'] = $this->materias->getMaterias();
+		$dados['consumos'] = $this->materias->getConsumos();
+		$dados['todos'] = $this->materias->getAll();
 		$this->load->view('compra/listarcompras', $dados);
-		$this->load->view('rodape');
-	}
-
-	public function produto($id=NULL)
-	{
-		$url = base_url('compras/index');
-
-		if($id == NULL)
-		{
-			redirect($url);
-		}
-
-		$this->load->model('produtos_model', 'produtos');
-		$this->load->model('usuarios_model', 'usuarios');
-		$this->load->model('fornecedores_model', 'fornecedores');
-
-		$qp = $this->produtos->getProdutoByID($id);
-
-		if($qp == NULL)
-		{
-			redirect($url);
-		}
-
-		$qu = $this->usuarios->getUsuarios();
-		$qf = $this->fornecedores->getFornecedores();
-
-		$dados['produto'] = $qp;
-		$dados['fornecedores'] = $qf;
-		$dados['usuarios'] = $qu;
-
-
-		$this->load->view('menu');
-		$this->load->view('compra/compraproduto', $dados);
 		$this->load->view('rodape');
 	}
 
@@ -56,11 +23,8 @@ class Compras extends CI_Controller
 		$data = date("Y-m-d");
 		$url = base_url('compras/index');
 		$this->load->model('compras_model', 'compras');
-		$dados['id_produto'] = $this->input->post('idproduto');
-		$dados['id_fornecedor'] = $this->input->post('fornecedor');
-		$dados['id_usuario'] = $this->input->post('usuario');
-		$dados['qtd'] = $this->input->post('qtdcomprar');
-		$dados['valor'] = $this->input->post('valor');
+		$dados['id_produto'] = $this->input->post('id_produto');
+		$dados['qtd'] = $this->input->post('qtd');
 		$dados['datasolicitacao'] = $data;
 		$this->compras->addCompra($dados);
 		redirect($url);
@@ -75,122 +39,76 @@ class Compras extends CI_Controller
 			redirect($url);
 		}
 
-		$this->load->model('produtos_model', 'produtos');
+		$this->load->model('materiasprima_model', 'materia');
 		$this->load->model('fornecedores_model', 'fornecedores');
 		$this->load->model('compras_model', 'compras');
 		$this->load->model('usuarios_model', 'usuarios');
 		$query = $this->compras->getCompraByID($id);
-
 		if($query == NULL)
 		{
 			redirect($url);
 		}
-
-		$qp = $this->produtos->getProdutos();
-		$qf = $this->fornecedores->getFornecedores();
-		$qu = $this->usuarios->getUsuarios();
-
 		$dados['compra'] = $query;
-		$dados['produtos'] = $qp;
-		$dados['fornecedores'] = $qf;
-		$dados['usuarios'] = $qu;
-
+		$dados['produtos'] = $this->materia->getAll();
+		$dados['fornecedores'] = $this->fornecedores->getFornecedores();
+		$dados['usuarios'] = $this->usuarios->getUsuarios();
 		$this->load->view('menu');
 		$this->load->view('compra/infocompra', $dados);
 		$this->load->view('rodape');
 	}
 
-	public function aprovarcompra($id=NULL)
+	public function gerarorc()
 	{
-
 		$url = base_url('compras/index');
-
-		if($id == NULL)
-		{
-			redirect($url);
-		}
-
 		$this->load->model('compras_model', 'compras');
-		$query = $this->compras->getCompraByID($id);
-
-		if($query == NULL)
-		{
-			redirect($url);
-		}
-		$data = date('Y-m-d');
-		$this->compras->aprovaCompra($id, $data);
+		$dados['id'] = $this->input->post('id');
+		$dados['id_fornecedor'] = $this->input->post('fornecedor');
+		$dados['valor'] = $this->input->post('valor');
+		$this->compras->gerarOrcamento($dados);
 		redirect($url);
 	}
 
-	public function aguardarentrega($id=NULL)
+	public function aprovarorc($id=NULL)
 	{
-
-		$url = base_url('compras/index');
-
 		if($id == NULL)
 		{
-			redirect($url);
+			redirect(base_url('compras/index'));
 		}
-
 		$this->load->model('compras_model', 'compras');
-		$query = $this->compras->getCompraByID($id);
-
-		if($query == NULL)
-		{
-			redirect($url);
-		}
 		$data = date('Y-m-d');
-		$this->compras->aguardaEntrega($id);
-		redirect($url);
+		$this->compras->aprovarOrcamento($id, $data);
+		redirect(base_url('compras/index'));
 	}
 
-	public function receberentrega($id=NULL)
+	public function receberentrega()
 	{
-
 		$url = base_url('compras/index');
-
-		if($id == NULL)
-		{
-			redirect($url);
-		}
-
 		//carrega a model compras
 		$this->load->model('compras_model', 'compras');
-		//pega o id da compra
-		$query = $this->compras->getCompraByID($id);
-
-		if($query == NULL)
-		{
-			redirect($url);
-		}
-
+		//pega a query da compra
+		$query = $this->compras->getCompraByID($this->input->post('id'));
 		//carrega a model produtos
-		$this->load->model('produtos_model', 'produtos');
+		$this->load->model('materiasprima_model', 'materias');
 		//pega a query do produto pelo id do produto na compra
-		$qp = $this->produtos->getProdutoByID($query->id_produto);
-
-		//carrega a model historico
-		$this->load->model('historico_model', 'historico');
-
+		$materia = $this->materias->getMateriaById($query->id_produto);
 		//Inicializa uma variável com a quantidade atual
-		$qtd = $query->qtd + $qp->qtd;
+		$qtd = $query->qtd + $materia->qtd;
 		//pega data atual
-		$data = date('Y-m-d');
-
-		//pega os elementos para realizar a inserção no historico
-		$dados['id_produto'] = $query->id_produto;
-		$dados['movimentacao'] = 'Compra';
-		$dados['qtd'] = $query->qtd;
-		$dados['data'] = $data;
-
+		$dados['data'] = date('Y-m-d');
+		$dados['nfcompra'] = $this->input->post('nf');
 		//atualiza o status da compra para entregue com a data atual pelo $id
-		$this->compras->recebeEntrega($id, $data);
+		$this->compras->recebeEntrega($this->input->post('id'), $dados);
 		//atualiza a quantidade de produtos
-		$this->produtos->atualizarQtd($qp->id, $qtd);
-
-		//insere o histórico
-		$this->historico->addHistorico($dados);
-
+		$this->materias->atualizarQtd($materia->id, $qtd);
+		//Histórico
+        $this->load->model('historico_model', 'historico');
+        $dadoshistorico['id_produto'] = $materia->id;
+        $dadoshistorico['tipo'] = $materia->tipo == 0 ? 1 : 2;
+        $dadoshistorico['qtd'] = $query->qtd;
+        $dadoshistorico['valor'] = $query->qtd*$materia->valor;
+        $dadoshistorico['tipo_movimentacao'] = 2;
+        $dadoshistorico['data'] = date('Y-m-d');
+        $this->historico->addHistorico($dadoshistorico);
 		//redireciona
 		redirect($url);
 	}

@@ -12,10 +12,6 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		<hr>
 		<form action="<?=base_url('setores/salvar');?>" method='post'>
 			<div class="row">
-				<div class="form-group col-md-1">
-					<label for="id">Código</label>
-					<input type="text" class="form-control" id="id" name="id" required/>
-				</div>
 				<div class="form-group col-md-4">
 					<label for="descricao">Descrição</label>
 					<input type="text" class="form-control" id="descricao" name="descricao" required/>

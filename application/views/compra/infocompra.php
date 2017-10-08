@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				?>
 			</p>
 		</div>
-		<div class="col-4">
+		<div class="col-2">
 			<p><b>Usuário solicitante: </b></p>
 			<p>
 				<?php
@@ -54,6 +54,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<p><b>Valor da Compra: </b></p>
 			<p>R$ <?=$compra->valor?></p>
 		</div>
+		<div class="col-2">
+			<p><b>NF da Compra:</b></p>
+			<p><?=$compra->nfcompra;?></p>
+		</div>
 	</div>
 	<div class="row">
 			<div class="col-4">
@@ -65,13 +69,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					echo "Cancelado";
 				} else if($compra->status == 1)
 				{
-					echo "Aguardando Aprovação";
+					echo "Aguardando Orçamento";
 				} else if ($compra->status == 2)
 				{
-					echo "Aprovada";
+					echo "Aguardando Aprovação";
 				} else if($compra->status == 3)
 				{
-					echo "Aguardando Entrega";
+					echo "Aprovada, aguardando entrega";
 				} else if($compra->status == 4)
 				{
 					echo "Entregue";
@@ -96,18 +100,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php
 			if($compra->status == 1){
 		?>
-			<a href="<?=base_url('compras/aprovarcompra/' . $compra->id)?>" class="btn btn-md btn-success">Aprovar Compra</a>
+		<div class="col-12">
+			<hr>
+			<form action="<?=base_url('compras/gerarorc');?>" method='post'>
+				<div class="row">
+					<input type="hidden" value="<?=$compra->id;?>" id="id" name="id"/>
+					<div class="form-group col-4">
+						<label for="fornecedor">Fornecedor</label>
+						<select class="form-control" id="fornecedor" name="fornecedor" required>
+							<option value=""></option>
+							<?php
+								foreach($fornecedores as $f):
+									echo "<option value='" . $f->id . "'>" . $f->fantasia . "</option>";
+								endforeach;
+							?>
+						</select>
+					</div>
+					<div class="form-group col-2">
+						<label for="valor">Valor da Compra</label>
+						<input type="text" class="form-control" id="valor" name="valor" placeholder="R$" required />
+					</div>
+					<div class="form-group">
+						<button type="submit" style="margin-top: 20%; cursor: pointer;" class="btn btn-md btn-success">Enviar Orçamento</button>
+					</div>
+				</div>
+			</form>
+		</div>
 		<?php } ?>
 		<?php
 			if($compra->status == 2){
 		?>
-			<a href="<?=base_url('compras/aguardarentrega/' . $compra->id)?>" class="btn btn-md btn-primary">Aguardar Entrega</a>
+			<a href="<?=base_url('compras/aprovarorc/' . $compra->id)?>" class="btn btn-md btn-primary">Aprovar Orçamento</a>
 		<?php } ?>
 		<?php
 			if($compra->status == 3){
 		?>
-			<a href="<?=base_url('compras/receberentrega/' . $compra->id)?>" class="btn btn-md btn-secondary">Receber Entrega</a>
-		<?php } ?>
+		<div class="col-12">
+			<form action="<?=base_url('compras/receberentrega');?>" method='post'>
+				<div class="row">
+					<input type="hidden" value="<?=$compra->id;?>" id="id" name="id"/>
+					<div class="form-group col-3">
+						<label for="nf">Nota Fiscal</label>
+						<input class="form-control" id="nf" name="nf" required type="text" required>
+					</div>
+					<div class="form-group">
+						<button type="submit" style="margin-top: 22%; cursor: pointer;" class="btn btn-md btn-success">Receber Entrega</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<?php } ?>	
 		<a style="margin-left: 1.5%;" href="<?=base_url('compras/index')?>" class="btn btn-md btn-secondary">Voltar</a>
 	</div>
 </div>

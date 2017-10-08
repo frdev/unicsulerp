@@ -6,7 +6,6 @@ class Departamentos_model extends CI_Model
 
 	public function getDepartamentos()
 	{
-		$this->db->order_by("descricao", "asc");
 		$query = $this->db->get("departamentos");
 		return $query->result();
 	}

@@ -8,11 +8,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 	<hr>
 		<form action="<?=base_url('armazens/editarArmazem');?>" name="form_add" method="post">
 			<div class="row">
-				<input type="text" name="idantigo" value="<?=$armazem->id;?>" hidden/>
-				<div class="form-group col-md-1">
-					<label for="id">Código</label>
-					<input type="text" class="form-control" id="id" name="id" value="<?=$armazem->id;?>" required/>
-				</div>
+				<input type="text" name="id" value="<?=$armazem->id;?>" hidden/>
 				<div class="form-group col-md-4">
 					<label for="descricao">Descrição</label>
 					<input type="text" class="form-control" id="descricao" name="descricao" value="<?=$armazem->descricao;?>" required/>
@@ -21,20 +17,21 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					<label for="tipoarmazem">Tipo Armazém</label>
 					<select class="form-control" id="tipoarmazem" name="tipoarmazem" required>
 						<?php
-							if($armazem->tipoarmazem == 'Produto Acabado')
+							if($armazem->tipoarmazem == 0)
 							{
-								echo "<option value='Produto Acabado' selected>Produto Acabado</option>";
-								echo "<option value='Matéria-prima'>Matéria-prima</option>";
-								echo "<option value='Matérial de insumo'>Material de insumo</option>";
-							} else if($armazem->tipoarmazem == 'Matéria-prima')
+								echo "<option value='0' selected>Produto Acabado</option>";
+								echo "<option value='1'>Matéria-prima</option>";
+								echo "<option value='2'>Consumo</option>";
+							} else if($armazem->tipoarmazem == 1)
 							{
-								echo "<option value='Produto Acabado'>Produto Acabado</option>";
-								echo "<option value='Matéria-prima' selected>Matéria-prima</option>";
-								echo "<option value='Matérial de insumo'>Material de insumo</option>";
-							} else {
-								echo "<option value='Produto Acabado'>Produto Acabado</option>";
-								echo "<option value='Matéria-prima'>Matéria-prima</option>";
-								echo "<option value='Matérial de insumo' selected>Material de insumo</option>";
+								echo "<option value='0'>Produto Acabado</option>";
+								echo "<option value='1' selected>Matéria-prima</option>";
+								echo "<option value='2'>Consumo</option>";
+							} else if($armazem->tipoarmazem == 2)
+							{
+								echo "<option value='0'>Produto Acabado</option>";
+								echo "<option value='1'>Matéria-prima</option>";
+								echo "<option value='2' selected>Consumo</option>";
 							}
 						?>
 					</select>

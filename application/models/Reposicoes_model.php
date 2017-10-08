@@ -20,4 +20,25 @@ class Reposicoes_model extends CI_Model
 		}
 	}
 
+	public function getReposicaoById($id=NULL){
+		if($id != NULL){
+			$query = $this->db->where('id', $id)->limit(1)->get('reposicoes')->row();
+			return $query;
+		}
+	}
+
+	public function aprovarReposicao($id=NULL, $data=NULL){
+		if($id != NULL && $data != NULL)
+		{
+			$this->db->where('id', $id)->update('reposicoes', array('status' => 2, 'datareposicao' => $data));
+		}
+	}
+
+	public function cancelarReposicao($id=NULL){
+		if($id != NULL){
+			$this->db->where('id', $id)->update('reposicoes', array('status' => 0));
+		}
+	}
+
+
 }

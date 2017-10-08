@@ -16,11 +16,9 @@ class Departamentos extends CI_Controller
 	public function salvar()
 	{
 
-		$id = $this->input->post('id');
 		$descricao = $this->input->post('descricao');
-		if($id != NULL && $descricao != NULL)
+		if($descricao != NULL)
 		{
-			$dados['id'] = $id;
 			$dados['descricao'] = $descricao;
 		} else {
 			redirect(base_url('departamentos/index'));
@@ -55,15 +53,13 @@ class Departamentos extends CI_Controller
 
 	public function editardepto()
 	{
-		if($this->input->post('id') == NULL || $this->input->post('descricao') == NULL || $this->input->post('status') == NULL)
+		if($this->input->post('descricao') == NULL)
 		{
 			redirect(base_url('departamentos/index'));
 		}
-		$data['id'] = $this->input->post('id');
 		$data['descricao'] = $this->input->post('descricao');
-		$data['status'] = $this->input->post('status');
 		$this->load->model("departamentos_model", "departamentos");
-		$query = $this->departamentos->editDepartamento($data, $this->input->post('idantigo'));
+		$query = $this->departamentos->editDepartamento($data, $this->input->post('id'));
 		redirect(base_url('departamentos/index'));
 	}
 

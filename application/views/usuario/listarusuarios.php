@@ -44,6 +44,21 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 						<option value='0'>Inativo</option>
 					</select>
 				</div>
+				<div class="form-group col-md-4">
+					<label for="departamento">Departamento</label>
+					<select class="form-control" id="departamento" name="departamento" required>
+						<option value=""></option>
+						<?php
+							foreach($departamentos as $depto):
+						?>
+							<option value="<?=$depto->id;?>"><?=$depto->descricao;?></option>
+						<?php
+							endforeach;
+						?>
+					</select>
+				</div>
+			</div>
+			<div class="col-4">
 				<div class="form-group col-md-4" style="margin-top: 2.5%;">
 					<input type="submit" class="btn btn-md btn-success" value="Cadastrar"/>
 					<input type="reset" class="btn btn-md btn-light" value="Limpar"/>
@@ -56,7 +71,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		<thead class="table-inverse">
 			<tr>
 				<td class='text-center'><b>Usuário</b></td>
-				<td class='text-center'><b>E-mail</b></td>
+				<td class='text-center'><b>Departamento</b></td>
 				<td class='text-center'><b>Permissão</b></td>
 				<td class='text-center'><b>Status</b></td>
 				<td class='text-center'><b>Ações</b></td>
@@ -68,7 +83,15 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			foreach ($usuarios as $usuario): ?>
 			<tr>
 				<td class='text-center'><?=$usuario->nome;?></td>
-				<td class='text-center'><?=$usuario->email;?></td>
+				<td class='text-center'>
+					<?php
+						foreach($departamentos as $depto):
+							if($depto->id == $usuario->id_departamento):
+								echo $depto->descricao;
+							endif;
+						endforeach;
+					?>
+				</td>
 				<?php
 				if($usuario->permissao == 10):
 					echo "<td class='text-center'>Administrador</td>";

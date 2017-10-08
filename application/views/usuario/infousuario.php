@@ -10,6 +10,18 @@
 			<p><?=$usuario->nome;?></p>
 		</div>
 		<div class="col-12">
+			<h4>Departamento</h4>
+			<p>
+				<?php
+					foreach($departamentos as $depto):
+						if($depto->id == $usuario->id_departamento):
+							echo $depto->descricao;
+						endif;
+					endforeach;
+				?>
+			</p>
+		</div>
+		<div class="col-12">
 			<h4>E-mail</h4>
 			<p><?=$usuario->email;?></p>
 		</div>

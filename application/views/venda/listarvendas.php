@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1 class="text-center">Solicitações de Vendas</h1>
 	<div class="collapse" id="testeCollapse">
 		<hr>
-		<form action="<?=base_url('vendas/salvar');?>" name="form_add" method="post">
+		<form id="form_venda" action="<?=base_url('vendas/salvar');?>" method="post">
 			<div class="row">
 				<div class="form-group col-md-5">
 					<label for="id_produto">Produto</label>
@@ -43,6 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<tr>
 				<td class='text-center' scope="row"><b>#</b></td>
 				<td class='text-center'><b>Produto</b></td>
+				<td class='text-center'><b>Valor Total</b></td>
 				<td class='text-center'><b>Qtd</b></td>
 				<td class='text-center'><b>Status</b></td>
 				<td class='text-center'><b>Ações</b></td>
@@ -59,6 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					if($produto->id == $venda->id_produto){
 				?>
 						<td class='text-center'><?=$produto->descricao;?></td>
+						<td class='text-center'>R$  	<?=$venda->qtd*$produto->valor;?></td>
 				<?php
 						break;
 					}
@@ -93,5 +95,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</tbody>
 	</table>
 	<p class="text-center"><b>Total de registros: <?=$contador;?></b></p>
-
 </div>
+<script type="text/javascript" src="/unicsulerp/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/unicsulerp/js/vendas.js"></script>

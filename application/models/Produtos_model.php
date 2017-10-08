@@ -4,10 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Produtos_model extends CI_Model
 {
 
-	public function getProdutos()
+	public function getProdutos($tipo=NULL)
 	{
-		$query = $this->db->get('produtos');
-		return $query->result();
+		if($tipo != NULL)
+		{
+			$query = $this->db->where('tipo', $tipo)->get('produtos');
+			return $query->result();
+		} else {
+			$query = $this->db->get('produtos');
+			return $query->result();
+		}
 	}
 
 	public function addProduto($dados=NULL)

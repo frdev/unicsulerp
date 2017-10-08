@@ -78,50 +78,27 @@ class Vendas extends CI_Controller
 
 	}
 
-	public function aprovarvenda($id=NULL)
+	public function aprovarvenda()
 	{
 		$url = base_url('vendas/index');
-
-		if($id == NULL)
-		{
-			redirect($url);
-		}
-
-		//carrega model vendas
 		$this->load->model('vendas_model', 'vendas');
-		$query = $this->vendas->getVendaByID($id);
-
-		//se a query é nula, redireciona
-		if($query == NULL)
-		{
-			redirect($url);
-		}
-
-		//carrega model produtos
+		$query = $this->vendas->getVendaByID($this->input->post('id'));
 		$this->load->model('produtos_model', 'produtos');
-		$qp = $this->produtos->getProdutoByID($query->id_produto);
-
-		//subtrai quantidade para passar por parametro
+		$qp = $this->produtos->getProdutoById($query->id_produto);
 		$qtd = $qp->qtd - $query->qtd;
-
-		//pega data atual
-		$data = date('Y-m-d');
-
-		//pega os elementos para realizar a inserção no historico
-		$dados['id_produto'] = $query->id_produto;
-		$dados['movimentacao'] = 'Venda';
-		$dados['qtd'] = $query->qtd;
-		$dados['data'] = $data;
-
-		//método da model vendas para aprovar vendas
-		$this->vendas->aprovaVenda($id, $data);
-		//carrega model historico
-		$this->load->model('historico_model', 'historico');
-		//adiciona o historico de acordo com os dados do vetor $dados
-		$this->historico->addHistorico($dados);
-		//atualiza quantidade do item em estoque
+		$dados['data'] = date('Y-m-d');
+		$dados['nfvenda'] = $this->input->post('nf');
+		$this->vendas->aprovaVenda($this->input->post('id'), $dados);
 		$this->produtos->atualizarQtd($qp->id, $qtd);
-		//redireciona
+		//Histórico
+        $this->load->model('historico_model', 'historico');
+        $dadoshistorico['id_produto'] = $qp->id;
+        $dadoshistorico['tipo'] = 0;
+        $dadoshistorico['qtd'] = $query->qtd;
+        $dadoshistorico['valor'] = $query->qtd*$qp->valor;
+        $dadoshistorico['tipo_movimentacao'] = 1;
+        $dadoshistorico['data'] = date('Y-m-d');
+        $this->historico->addHistorico($dadoshistorico);
 		redirect($url);
 	}
 

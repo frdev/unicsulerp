@@ -55,10 +55,26 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 						?>
 					</select>
 				</div>
+				<div class="form-group col-md-4">
+					<label for="departamento">Departamento</label>
+					<select class="form-control" id="departamento" name="departamento" required>
+						<?php
+							foreach($departamentos as $depto):
+								if($depto->id == $usuario->id_departamento){
+									echo '<option value="' . $depto->id . '" selected>' . $depto->descricao . '</option>';
+								} else {
+									echo '<option value="' . $depto->id . '">' . $depto->descricao . '</option>';
+								}
+							endforeach;
+						?>
+					</select>
+				</div>
+			</div>
+			<div class="row">
 				<div class="form-group col-md-4" style="margin-top: 2.5%;">
 					<input type="submit" class="btn btn-md btn-success" value="Editar"/>
 					<a href="<?=base_url('usuarios/listarusuarios');?>" class="btn btn-md btn-light">Voltar</a>
-				</div> 
+				</div>
 			</div>
 		</form>
 	</div>

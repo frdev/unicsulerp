@@ -37,11 +37,11 @@ class Vendas_model extends CI_Model
 		}
 	}
 
-	public function aprovaVenda($id=NULL, $data=NULL)
+	public function aprovaVenda($id=NULL, $dados=NULL)
 	{
-		if($id !=NULL && $data != NULL)
+		if($id !=NULL && $dados != NULL)
 		{
-			$this->db->update('vendas', array('status' => 2, 'dataaprovada' => $data), array('id' => $id));
+			$this->db->update('vendas', array('status' => 2, 'dataaprovada' => $dados['data'], 'nfvenda' => $dados['nfvenda']), array('id' => $id));
 		}
 	}
 

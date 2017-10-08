@@ -18,6 +18,15 @@ class Armazens_model extends CI_Model
 		return $query->result();
 	}
 
+	public function getArmazemByTipo($tipo=NULL)
+	{
+		if($tipo != NULL || $tipo === 0	)
+		{
+			$query = $this->db->where('tipoarmazem', $tipo)->get('armazens')->result();
+			return $query;
+		}
+	}
+
 	public function getArmazemById($id=NULL)
 	{
 		if($id != NULL)
@@ -43,14 +52,6 @@ class Armazens_model extends CI_Model
 		if($id != NULL)
 		{
 			$this->db->delete('armazens', array('id' => $id));
-		}
-	}
-
-	public function addSetorArmazem($dados=NULL)
-	{
-		if($dados != NULL)
-		{
-			$this->db->insert('setores_armazem', $dados);
 		}
 	}
 

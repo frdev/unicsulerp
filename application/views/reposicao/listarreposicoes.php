@@ -96,9 +96,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					} else if ($reposicao->status == 2)
 					{
 						echo "Aprovada";
-					} else if($reposicao->status == 3)
-					{
-						echo "Reposição realizada";
 					}
 				?>
 				</td>
@@ -107,7 +104,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<a href="<?=base_url('reposicoes/info/' . $reposicao->id)?>" class="btn btn-sm btn-primary">+Info</a>
 				</td>
 				<td class='text-center'>
-					<?php if($reposicao->status != 3 && $reposicao->status != 0) { ?>
+					<?php if($reposicao->status == 1) { ?>
 						<a href="<?=base_url('reposicoes/cancelar/' . $reposicao->id)?>" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
 					<?php } else {
 							echo "-";

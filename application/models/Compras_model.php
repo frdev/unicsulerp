@@ -14,7 +14,7 @@ class Compras_model extends CI_Model
 
 	public function getCompras()
 	{
-		$query = $this->db->get('compras');
+		$query = $this->db->order_by('datasolicitacao desc')->get('compras');
 		return $query->result();
 	}
 
@@ -29,29 +29,38 @@ class Compras_model extends CI_Model
 		}
 	}
 
-	public function aprovaCompra($id=NULL, $data=NULL)
+	public function gerarOrcamento($dados=NULL)
 	{
 
-		if($id !=NULL && $data != NULL)
+		if($dados != NULL)
 		{
-			$this->db->update('compras', array('status' => 2, 'dataaprovado' => $data), array('id' => $id));
+
+			$id = $dados['id'];
+			$fornecedor = $dados['id_fornecedor'];
+			$valor = $dados['valor'];
+			$this->db->update('compras', 
+				array(
+					'status' => 2, 
+					'id_fornecedor' => $fornecedor,
+					'valor' => $valor 
+				), array('id' => $id));
 		}
 
 	}
 
-	public function aguardaEntrega($id=NULL)
-	{
-		if($id !=NULL)
-		{
-			$this->db->update('compras', array('status' => 3), array('id' => $id));
-		}
-	}
-
-	public function recebeEntrega($id=NULL, $data=NULL)
+	public function aprovarOrcamento($id=NULL, $data=NULL)
 	{
 		if($id !=NULL && $data != NULL)
 		{
-			$this->db->update('compras', array('status' => 4, 'dataentregue' => $data), array('id' => $id));
+			$this->db->update('compras', array('status' => 3, 'dataaprovado' => $data), array('id' => $id));
+		}
+	}
+
+	public function recebeEntrega($id=NULL, $dados=NULL)
+	{
+		if($id !=NULL && $dados != NULL)
+		{
+			$this->db->update('compras', array('status' => 4, 'dataentregue' => $dados['data'], 'nfcompra' => $dados['nfcompra']), array('id' => $id));
 		}
 	}
 

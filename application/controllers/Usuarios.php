@@ -7,11 +7,10 @@ class Usuarios extends CI_Controller
 	public function listarusuarios()
 	{
 		$this->load->view('menu');
-		//echo "<pre>";
 		$this->load->model('usuarios_model', 'usuarios');
 		$data['usuarios'] = $this->usuarios->getUsuarios();
-		//print_r($data);
-		//echo "</pre>";
+		$this->load->model('departamentos_model', 'departamentos');
+		$data['departamentos'] = $this->departamentos->getDepartamentos();
 		$this->load->view('usuario/listarusuarios', $data);
 		$this->load->view('rodape');
 	}
@@ -23,6 +22,7 @@ class Usuarios extends CI_Controller
 			redirect($url);
 		} else {
 			$this->load->model('usuarios_model', 'usuarios');
+			$dados['id_departamento'] = $this->input->post('departamento');
 			$dados['nome'] = $this->input->post('nome');
 			$dados['usuario'] = $this->input->post('usuario');
 			$dados['senha'] = md5($this->input->post('senha'));
@@ -53,6 +53,8 @@ class Usuarios extends CI_Controller
 
 		$this->load->model('usuarios_model', 'usuarios');
 		$query = $this->usuarios->getUsuarioByID($id);
+		$this->load->model('departamentos_model', 'departamentos');
+		$data['departamentos'] = $this->departamentos->getDepartamentos();
 
 		if($query == NULL){
 			redirect($url);
@@ -98,8 +100,9 @@ class Usuarios extends CI_Controller
 		}
 
 		$this->load->model('usuarios_model', 'usuarios');
-
 		$query = $this->usuarios->getUsuarioByID($id);
+		$this->load->model('departamentos_model', 'departamentos');
+		$dados['departamentos'] = $this->departamentos->getDepartamentos();
 
 		if($query == NULL)
 		{

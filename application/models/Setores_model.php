@@ -72,4 +72,11 @@ class Setores_model extends CI_Model
 		}
 	}
 
+	public function updateSetor($dados=NULL, $idold=NULL)
+	{
+		if($dados != NULL && $idold != NULL){
+			$this->db->where('id', $idold)->update('setores', $dados);
+		}
+	}
+
 }

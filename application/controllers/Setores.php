@@ -13,39 +13,14 @@ class Setores extends CI_Controller
 		$this->load->view('rodape');
 	}
 
-	public function info($idsetor=NULL, $idarmazem=NULL)
-	{
-		$this->load->view('menu');
-		$this->load->model('armazens_model', 'armazens');
-		$dados['armazem'] = $this->armazens->getArmazembyId($idarmazem);
-		if($dados['armazem'] == NULL)
-		{
-			redirect('armazens/info/' . $idarmazem);
-		}
-		$this->load->model('setores_model', 'setores');
-		$dados['setor'] = $this->setores->getSetorById($idsetor, $idarmazem);
-		if($dados['setor'] == NULL)
-		{
-			redirect('armazens/info/' . $idarmazem);
-		}
-		$this->load->model('prateleiras_model', 'prateleiras');
-		$dados['prateleiras'] = $this->prateleiras->getPrateleirasBySetorArmazem($idsetor, $idarmazem);
-		$this->load->view('setores/infosetor', $dados);
-	}
-
 	public function salvar()
 	{
-		if($this->input->post('id') == NULL || $this->input->post('descricao') == NULL)
+		if($this->input->post('descricao') == NULL)
 		{
 			redirect('setores/index');
 		}
-		$dados['id'] = $this->input->post('id');
 		$dados['descricao'] = $this->input->post('descricao');
 		$this->load->model('setores_model', 'setores');
-		if($this->setores->getSetorUnico($dados['id']) != NULL)
-		{
-			redirect('setores/index');
-		}
 		$this->setores->addSetor($dados);
 		redirect('setores/index');
 	}
@@ -62,6 +37,35 @@ class Setores extends CI_Controller
 			redirect('setores/index');
 		}
 		$this->setores->deleteSetor($id);
+		redirect('setores/index');
+	}
+
+	public function editar($id=NULL)
+	{
+		if($id == NULL)
+		{
+			redirect('setores/index');
+		}
+		$this->load->model('setores_model', 'setores');
+		if($this->setores->getSetorUnico($id) == NULL)
+		{
+			redirect('setores/index');
+		}
+		$dados['setor'] = $this->setores->getSetorUnico($id);
+		$this->load->view('menu');
+		$this->load->view('setores/editsetor', $dados);
+		$this->load->view('rodape');
+	}
+
+	public function editarsetor()
+	{
+		if($this->input->post('descricao') == NULL)
+		{
+			redirect('setores/index');
+		}	
+		$dados['descricao'] = $this->input->post('descricao');
+		$this->load->model('setores_model', 'setores');
+		$this->setores->updateSetor($dados, $this->input->post('id'));
 		redirect('setores/index');
 	}
 

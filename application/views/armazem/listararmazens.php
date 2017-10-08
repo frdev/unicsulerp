@@ -12,10 +12,6 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		<hr>
 		<form action='<?=base_url("armazens/salvar");?>' method='post'>
 			<div class="row">
-				<div class="form-group col-md-1">
-					<label for="id">Código</label>
-					<input type="text" class="form-control" id="id" name="id" required/>
-				</div>
 				<div class="form-group col-md-4">
 					<label for="descricao">Descrição</label>
 					<input type="text" class="form-control" id="descricao" name="descricao" required/>
@@ -23,9 +19,10 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 				<div class="form-group col-md-3">
 					<label for="tipoarmazem">Tipo Armazém</label>
 					<select type="text" class="form-control" id="tipoarmazem" name="tipoarmazem" required/>
-						<option value="Produto Acabado">Produto Acabado</option>
-						<option value="Matéria-prima">Matéria-prima</option>
-						<option value="Material de insumo">Material de insumo</option>
+						<option value=""></option>
+						<option value="0">Produto Acabado</option>
+						<option value="1">Matéria-prima</option>
+						<option value="2">Consumo</option>
 					</select>
 				</div>
 				<div class="form-group col-md-3" style="margin-top: 2.5%;">
@@ -58,9 +55,21 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					<tr>
 						<td class='text-center' row="scope"><?=$am->id;?></td>
 						<td class='text-center'><?=$am->descricao;?></td>
-						<td class="text-center"><?=$am->tipoarmazem;?></td>
+						<td class="text-center">
+							<?php
+								if($am->tipoarmazem == 0)
+								{
+									echo "Produto acabado";
+								} else if($am->tipoarmazem == 1)
+								{
+									echo "Matéria-prima";
+								} else if($am->tipoarmazem == 2)
+								{
+									echo "Consumo";
+								}
+							?>
+						</td>
 						<td class='text-center'>
-						<a class="btn btn-sm btn-primary" href="<?=base_url('/armazens/info/' . $am->id)?>"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 						<a class="btn btn-sm btn-warning" href="<?=base_url('/armazens/editar/' . $am->id)?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 						<a class="btn btn-sm btn-danger" href="<?=base_url('/armazens/apagar/' . $am->id)?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 						</td>

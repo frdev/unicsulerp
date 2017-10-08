@@ -7,7 +7,20 @@
 				<hr>
 			</div>
 			<div class="col-12">
-				<span>Tipo de Armazém: <?=$armazem->tipoarmazem?></span>
+				<span>Tipo de Armazém: 
+					<?php
+						if($armazem->tipoarmazem == 0)
+						{
+							echo "Produto Acabado";
+						} else if($armazem->tipoarmazem == 1)
+						{
+							echo "Matéria-prima";
+						} else if($armazem->tipoarmazem == 2)
+						{
+							echo "Material de consumo";
+						}
+					?>
+				</span>
 			</div>
 			<div class="col-1"></div>
 		</div>
@@ -20,8 +33,8 @@
 					<thead>
 						<td>#</td>
 						<td class='text-center'>Prateleira</td>
-						<td class='text-center'>DX</td>
-						<td class='text-center'>DY</td>
+						<td class='text-center'>Produto</td>
+						<td class='text-center'>Quantidade</td>
 						<td class='text-center'>+Info</td>
 					</thead>
 					<tbody>
@@ -32,8 +45,8 @@
 							<tr>
 								<td><?=$contador+1;?></td>
 								<td class='text-center'><?=$prat->id_prateleira;?></td>
-								<td class='text-center'><?=$prat->posicoesx;?></td>
-								<td class='text-center'><?=$prat->posicoesy;?></td>
+								<td class='text-center'><?=$prat->id_produto == NULL ? '<button class="btn btn-sm btn-primary" id="btnAdd" value="$prat->id_prateleira">Add Produto</button>' : $prat->id_produto?></td>
+								<td></td>
 								<td class='text-center'><a class='btn btn-sm btn-primary' href="<?=base_url('prateleiras/tabela/' . $prat->id_prateleira);?>"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
 							</tr>
 						<?php $contador++;
@@ -56,14 +69,6 @@
 						<input type='text' class='form-control' name='id' id='id' required/>
 						<button type='submit' class='btn btn-sm btn-success' style="margin-top: 23%;">Cadastrar</button>
 						<button type='reset' class='btn btn-sm btn-light' style="margin-top: 23%;">Limpar</button>
-					</div>
-					<div class='form-group col-4'>
-						<label for='dx'>Dimensão X</label>
-						<input type='number' class='form-control' name='dx' id='dx' required/>
-					</div>
-					<div class='form-group col-4'>
-						<label for='dy'>Dimensão Y</label>
-						<input type='number' class='form-control' name='dy' id='dy' required/>
 					</div>
 				</div>
 			</form>
