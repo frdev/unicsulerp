@@ -107,7 +107,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					<?php
 					if($consumo->qtd < $consumo->qtdmin)
 					{ 
-						echo "<span class='text-danger'><b>Necessária a compra</b></span>";
+						echo "<span class='text-danger'><b>Comprar</b></span>";
 					} else
 					{
 						echo "Não há necessidade";

@@ -24,6 +24,7 @@ class Compras extends CI_Controller
 		$url = base_url('compras/index');
 		$this->load->model('compras_model', 'compras');
 		$dados['id_produto'] = $this->input->post('id_produto');
+		$dados['tipo_produto'] = $this->input->post('tipo');
 		$dados['qtd'] = $this->input->post('qtd');
 		$dados['datasolicitacao'] = $data;
 		$this->compras->addCompra($dados);
@@ -103,10 +104,11 @@ class Compras extends CI_Controller
 		//Histórico
         $this->load->model('historico_model', 'historico');
         $dadoshistorico['id_produto'] = $materia->id;
-        $dadoshistorico['tipo'] = $materia->tipo == 0 ? 1 : 2;
+        $dadoshistorico['id_solicitacao'] = $this->input->post('id');
+        $dadoshistorico['tipo'] = $this->input->post('tipo');
         $dadoshistorico['qtd'] = $query->qtd;
-        $dadoshistorico['valor'] = $query->qtd*$materia->valor;
-        $dadoshistorico['tipo_movimentacao'] = 2;
+        $dadoshistorico['valor'] = $query->valor;
+        $dadoshistorico['tipo_movimentacao'] = 0;
         $dadoshistorico['data'] = date('Y-m-d');
         $this->historico->addHistorico($dadoshistorico);
 		//redireciona

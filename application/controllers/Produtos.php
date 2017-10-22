@@ -95,7 +95,7 @@ class Produtos extends CI_Controller
 	}
 
 	public function apagar($id=NULL){
-		$url = base_url('produtos/listarprodutos');
+		$url = base_url('materiasprima/listarprodutos');
 		if($id==NULL){
 			redirect($url);
 		}
@@ -126,7 +126,9 @@ class Produtos extends CI_Controller
 		if($query == NULL){
 			redirect($url);
 		} else {
+			$this->load->model('historico_model', 'historico');
 			$dados['produto'] = $query;
+			$dados['historico'] = $this->historico->getHistoricoByIdTipo($id, 0);
 			$this->load->view('menu');
 			$this->load->view('produto/infoproduto', $dados);
 			$this->load->view('rodape');

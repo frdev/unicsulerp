@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<hr>
 		<form id="form_compraconsumo" action="<?=base_url('compras/salvar');?>" method="post">
 			<div class="row">
+				<input type="hidden" name="tipo" value="0"/>
 				<div class="form-group col-md-5">
 					<label for="id_produto">Consumo</label>
 					<select class="form-control" id="id_produto" name="id_produto" required>
@@ -39,6 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<hr>
 		<form id="form_compramateria" action="<?=base_url('compras/salvar');?>" method="post">
 			<div class="row">
+				<input type="hidden" name="tipo" value="1"/>
 				<div class="form-group col-md-5">
 					<label for="id_produto">Matéria-prima</label>
 					<select class="form-control" id="id_produto" name="id_produto" required>

@@ -89,7 +89,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <a href="<?=base_url('producoes/info/' . $producao->id)?>" class="btn btn-sm btn-primary">+Info</a>
                 </td>
                 <td class='text-center'>
-                    <?php if($producao->status != 2 && $producao->status != 0) { ?>
+                    <?php if($producao->status != 3 && $producao->status != 0) { ?>
                         <a href="<?=base_url('producoes/cancelar/' . $producao->id)?>" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a>
                     <?php } else {
                             echo "-";

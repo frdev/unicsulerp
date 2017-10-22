@@ -49,14 +49,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a class="dropdown-item" href="<?=base_url('departamentos/index')?>">Departamentos</a>
             </div>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitações</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="<?=base_url('compras/index')?>">Compras</a>
-              <a class="dropdown-item" href="<?=base_url('vendas/index')?>">Vendas</a>
-              <a class="dropdown-item" href="<?=base_url('producoes/index')?>">Produções</a>
-              <a class="dropdown-item" href="<?=base_url('reposicoes/index')?>">Reposições de Usuários</a>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url('compras/index')?>">Compras</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url('vendas/index')?>">Vendas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url('producoes/index')?>">Produções</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url('reposicoes/index')?>">Reposições de Usuários</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('login/logout');?>">Sair</a>

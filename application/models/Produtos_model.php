@@ -26,9 +26,13 @@ class Produtos_model extends CI_Model
 	public function getProdutoByID($id=NULL)
 	{
 		if($id != NULL){
-			$this->db->where('id', $id);
-			$this->db->limit(1);
-			$query = $this->db->get('produtos');
+			$query = $this->db->select('produtos.*, armazens.descricao as arm_desc, categorias.descricao as cat_desc')
+			->from('produtos')
+			->join('armazens', 'armazens.id = produtos.id_armazem', 'left')
+			->join('categorias', 'categorias.id = produtos.id_categoria', 'left')
+			->where('produtos.id', $id)	
+			->limit(1)
+			->get();
 			return $query->row();
 		}
 	}

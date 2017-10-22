@@ -25,6 +25,14 @@ CREATE TABLE IF NOT EXISTS `armazens` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- Exportação de dados foi desmarcado.
+-- Copiando estrutura para tabela erp.setores
+CREATE TABLE IF NOT EXISTS `setores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela erp.categorias
 CREATE TABLE IF NOT EXISTS `categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -34,29 +42,6 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   KEY `setor_categoria_fk` (`id_setor`),
   CONSTRAINT `setor_categoria_fk` FOREIGN KEY (`id_setor`) REFERENCES `setores` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
--- Exportação de dados foi desmarcado.
--- Copiando estrutura para tabela erp.compras
-CREATE TABLE IF NOT EXISTS `compras` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_produto` int(11) NOT NULL,
-  `id_fornecedor` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `qtd` int(11) NOT NULL,
-  `valor` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '1' COMMENT '1- Aguardando Orçamento / 2- Aguardando Aprovação / 3- Aprovado, aguardando entrega / 4- Recebido',
-  `nfcompra` varchar(10) DEFAULT NULL,
-  `datasolicitacao` date NOT NULL,
-  `dataaprovado` date DEFAULT NULL,
-  `dataentregue` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_produto` (`id_produto`),
-  KEY `fk_usuario` (`id_usuario`),
-  KEY `fk_fornecedor` (`id_fornecedor`),
-  CONSTRAINT `fk_fornecedor` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedores` (`id`),
-  CONSTRAINT `fk_produto` FOREIGN KEY (`id_produto`) REFERENCES `materias` (`id`),
-  CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela erp.consumos
@@ -132,22 +117,6 @@ CREATE TABLE IF NOT EXISTS `materias` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Exportação de dados foi desmarcado.
--- Copiando estrutura para tabela erp.producoes
-CREATE TABLE IF NOT EXISTS `producoes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_produto` int(11) DEFAULT NULL,
-  `qtd` int(11) DEFAULT '1',
-  `status` int(11) DEFAULT '1' COMMENT '0- Cancelado / 1- Aguardando Aprovação / 2- Aprovado, em produção / 3- Entregue',
-  `lote` int(11) DEFAULT NULL,
-  `datasolicitacao` date DEFAULT NULL,
-  `dataaprovacao` date DEFAULT NULL,
-  `dataentrega` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_produto_producao` (`id_produto`),
-  CONSTRAINT `fk_produto_producao` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
--- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela erp.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -177,14 +146,6 @@ CREATE TABLE IF NOT EXISTS `reposicoes` (
   KEY `fk_departamento_deposicao` (`id_departamento`),
   CONSTRAINT `fk_departamento_deposicao` FOREIGN KEY (`id_departamento`) REFERENCES `departamentos` (`id`),
   CONSTRAINT `fk_produto_reposicao` FOREIGN KEY (`id_produto`) REFERENCES `materias` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
--- Exportação de dados foi desmarcado.
--- Copiando estrutura para tabela erp.setores
-CREATE TABLE IF NOT EXISTS `setores` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Exportação de dados foi desmarcado.
@@ -224,3 +185,42 @@ CREATE TABLE IF NOT EXISTS `vendas` (
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+-- Exportação de dados foi desmarcado.
+-- Copiando estrutura para tabela erp.compras
+CREATE TABLE IF NOT EXISTS `compras` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_produto` int(11) NOT NULL,
+  `id_fornecedor` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `qtd` int(11) NOT NULL,
+  `valor` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '1- Aguardando Orçamento / 2- Aguardando Aprovação / 3- Aprovado, aguardando entrega / 4- Recebido',
+  `nfcompra` varchar(10) DEFAULT NULL,
+  `datasolicitacao` date NOT NULL,
+  `dataaprovado` date DEFAULT NULL,
+  `dataentregue` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_produto` (`id_produto`),
+  KEY `fk_usuario` (`id_usuario`),
+  KEY `fk_fornecedor` (`id_fornecedor`),
+  CONSTRAINT `fk_fornecedor` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedores` (`id`),
+  CONSTRAINT `fk_produto` FOREIGN KEY (`id_produto`) REFERENCES `materias` (`id`),
+  CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+-- Exportação de dados foi desmarcado.
+-- Copiando estrutura para tabela erp.producoes
+CREATE TABLE IF NOT EXISTS `producoes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_produto` int(11) DEFAULT NULL,
+  `qtd` int(11) DEFAULT '1',
+  `status` int(11) DEFAULT '1' COMMENT '0- Cancelado / 1- Aguardando Aprovação / 2- Aprovado, em produção / 3- Entregue',
+  `lote` int(11) DEFAULT NULL,
+  `datasolicitacao` date DEFAULT NULL,
+  `dataaprovacao` date DEFAULT NULL,
+  `dataentrega` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_produto_producao` (`id_produto`),
+  CONSTRAINT `fk_produto_producao` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;

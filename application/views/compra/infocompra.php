@@ -138,6 +138,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="col-12">
 			<form action="<?=base_url('compras/receberentrega');?>" method='post'>
 				<div class="row">
+					<input type="hidden" value="<?=$compra->tipo_produto;?>" id="tipo" name="tipo" />
 					<input type="hidden" value="<?=$compra->id;?>" id="id" name="id"/>
 					<div class="form-group col-3">
 						<label for="nf">Nota Fiscal</label>

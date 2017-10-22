@@ -44,7 +44,8 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
                     if($h->tipo == 0){
                         foreach($produtos as $produto):
                             if($h->id_produto == $produto->id){
-                                echo "<td>" . $produto->descricao . "</td>";
+                                $url = base_url('produtos/info/' . $h->id_produto);
+                                echo "<td><a href='$url'>" . $produto->descricao . "</a></td>";
                                 echo "<td class='text-center'>Produto Acabado</td>";
                                 break;
                             }
@@ -52,19 +53,32 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
                     } else if($h->tipo == 1 || $h->tipo == 2){
                         foreach($materias as $materia):
                             if($h->id_produto == $materia->id){
-                                echo "<td>" . $materia->descricao . "</td>";
-                                echo "<td class='text-center'>Matéria-prima/Consumo</td>";
+                                if($h->tipo == 1){
+                                    $url = base_url('materiasprima/infomateria/' . $h->id_produto);
+                                    echo "<td><a href='$url'>" . $materia->descricao . "</a></td>";
+                                    echo "<td class='text-center'>Matéria-prima</td>";
+                                } else {
+                                    $url = base_url('listarmaterias/infoconsumo/' . $h->id_produto);
+                                    echo "<td><a href='$url'>" . $materia->descricao . "</a></td>";
+                                    echo "<td class='text-center'>Consumo</td>";
+                                }
                                 break;
                             }
                         endforeach;
                     }
                 
                     if($h->tipo_movimentacao == 0){
-                        echo "<td class='text-center'>Compra</td>";
+                        $url = base_url('compras/info/' . $h->id_solicitacao);
+                        echo "<td class='text-center'><a href='$url'>Compra</td>";
                     } else if ($h->tipo_movimentacao == 1){
-                        echo "<td class='text-center'>Venda</td>";
+                        $url = base_url('vendas/info/' . $h->id_solicitacao);
+                        echo "<td class='text-center'><a href='$url'>Venda</a></td>";
                     } else if ($h->tipo_movimentacao == 2){
-                        echo "<td class='text-center'>Reposição</td>";
+                        $url = base_url('reposicoes/info/' . $h->id_solicitacao);
+                        echo "<td class='text-center'><a href='$url'>Reposição</a></td>";
+                    } else if ($h->tipo_movimentacao == 3){
+                        $url = base_url('producoes/info/' . $h->id_solicitacao);
+                        echo "<td class='text-center'><a href='$url'>Produção</a></td>";
                     }
                 ?>
                 <td class='text-center'><?=$h->qtd;?></td>

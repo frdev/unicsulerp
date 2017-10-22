@@ -107,7 +107,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					<?php
 					if($materia->qtd < $materia->qtdmin)
 					{ 
-						echo "<span class='text-danger'><b>Necessária a compra</b></span>";
+						echo "<span class='text-danger'><b>Comprar</b></span>";
 					} else
 					{
 						echo "Não há necessidade";
@@ -115,7 +115,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					echo '</td>';
 					echo '<td class="text-center">';
 					?>
-					<a class="btn btn-sm btn-primary" href="<?=base_url('/materiasprima/info/' . $materia->id);?>"><i class="fa fa-info" aria-hidden="true"></i></a>
+					<a class="btn btn-sm btn-primary" href="<?=base_url('/materiasprima/infomateria/' . $materia->id);?>"><i class="fa fa-info" aria-hidden="true"></i></a>
 					<a class="btn btn-sm btn-warning" href="<?=base_url('/materiasprima/editar/' . $materia->id);?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 					<a class="btn btn-sm btn-danger" href="<?=base_url('/materiasprima/apagar/' . $materia->id);?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 					<?php

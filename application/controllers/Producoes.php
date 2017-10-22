@@ -57,6 +57,15 @@ class Producoes extends CI_Controller
         $dados['lote'] = $this->input->post('lote');
         $this->producoes->receberProducao($this->input->post('id'), $dados);
         $this->produtos->atualizarQtd($qp->id, $qtd);
+        //Histórico
+        $this->load->model('historico_model', 'historico');
+        $dadoshistorico['id_produto'] = $qp->id;
+        $dadoshistorico['id_solicitacao'] = $id;
+        $dadoshistorico['tipo'] = 0;
+        $dadoshistorico['qtd'] = $query->qtd;
+        $dadoshistorico['valor'] = 0;
+        $dadoshistorico['tipo_movimentacao'] = 3;
+        $dadoshistorico['data'] = date('Y-m-d');
         redirect(base_url('producoes/index'));
     }
 

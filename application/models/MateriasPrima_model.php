@@ -27,7 +27,13 @@ class MateriasPrima_model extends CI_Model
 	{
 		if($id != NULL)
 		{
-			$query = $this->db->where('id', $id)->limit(1)->get('materias')->row();
+			$query = $this->db->select('materias.*, armazens.descricao as arm_desc')
+			->from('materias')
+			->where('materias.id', $id)
+			->join('armazens', 'armazens.id = materias.id_armazem', 'left')
+			->limit(1)
+			->get()
+			->row();
 			return $query;
 		}
 	}
@@ -60,7 +66,13 @@ class MateriasPrima_model extends CI_Model
 
 	public function getConsumoById($id=NULL){
 		if($id != NULL){
-			$query = $this->db->where('id', $id)->limit(1)->get('materias')->row();
+			$query = $this->db->select('materias.*, armazens.descricao as arm_desc')
+			->from('materias')
+			->where('materias.id', $id)
+			->join('armazens', 'armazens.id = materias.id_armazem', 'left')
+			->limit(1)
+			->get()
+			->row();
 			return $query;
 		}
 	}

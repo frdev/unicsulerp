@@ -60,6 +60,7 @@ class Reposicoes extends CI_Controller
 		//Histórico
         $this->load->model('historico_model', 'historico');
         $dadoshistorico['id_produto'] = $qp->id;
+        $dadoshistorico['id_solicitacao'] = $id;
         $dadoshistorico['tipo'] = $qp->tipo == 0 ? 1 : 2;
         $dadoshistorico['qtd'] = $query->qtd;
         $dadoshistorico['valor'] = $query->qtd*$qp->valor;

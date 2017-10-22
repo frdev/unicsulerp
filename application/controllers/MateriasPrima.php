@@ -129,4 +129,48 @@ class MateriasPrima extends CI_Controller
 		redirect(base_url('materiasprima/listarconsumos'));
 	}
 
+	public function infomateria($id=NULL){
+		$url = base_url('materiasprima/listarmaterias');
+		if($id==NULL){
+			redirect($url);
+		}
+
+		$this->load->model('materiasprima_model', 'materias');
+
+		$query = $this->materias->getMateriaByID($id);
+
+		if($query == NULL){
+			redirect($url);
+		} else {
+			$this->load->model('historico_model', 'historico');
+			$dados['produto'] = $query;
+			$dados['historico'] = $this->historico->getHistoricoByIdTipo($id, 1);
+			$this->load->view('menu');
+			$this->load->view('consumo/infoconsumo', $dados);
+			$this->load->view('rodape');
+		}
+	}
+
+	public function infoconsumo($id=NULL){
+		$url = base_url('materiasprima/listarmaterias');
+		if($id==NULL){
+			redirect($url);
+		}
+
+		$this->load->model('materiasprima_model', 'materias');
+
+		$query = $this->materias->getConsumoById($id);
+
+		if($query == NULL){
+			redirect($url);
+		} else {
+			$this->load->model('historico_model', 'historico');
+			$dados['produto'] = $query;
+			$dados['historico'] = $this->historico->getHistoricoByIdTipo($id, 2);
+			$this->load->view('menu');
+			$this->load->view('consumo/infoconsumo', $dados);
+			$this->load->view('rodape');
+		}
+	}
+
 }

@@ -55,6 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<td class='text-center'><b>Departamento</b></td>
 				<td class='text-center'><b>Status</b></td>
 				<td class='text-center'><b>Data Solicitação</b></td>
+				<td class='text-center'><b>Data Reposição</b></td>
 				<td class='text-center'><b>Ações</b></td>
 				<td class='text-center'><b>Cancelar</b></td>
 			</tr>
@@ -100,6 +101,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				?>
 				</td>
 				<td class='text-center'><?=$reposicao->datasolicitacao;?></td>
+				<td class='text-center'><?=$reposicao->datareposicao;?></td>
 				<td class='text-center'>
 					<a href="<?=base_url('reposicoes/info/' . $reposicao->id)?>" class="btn btn-sm btn-primary">+Info</a>
 				</td>

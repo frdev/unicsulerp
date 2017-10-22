@@ -123,7 +123,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					<?php
 					if($produto->qtd <= $produto->qtdmin)
 					{ 
-						echo "<span class='text-danger'><b>Necessário produzir</b></span>";
+						echo "<span class='text-danger'><b>Produzir</b></span>";
 					} else
 					{
 						echo "Não há necessidade";

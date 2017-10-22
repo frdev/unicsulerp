@@ -5,7 +5,7 @@ class Producoes_model extends CI_Model
 {
 
     public function getProducoes(){
-        $query = $this->db->get('producoes')->result();
+        $query = $this->db->order_by('datasolicitacao desc')->get('producoes')->result();
         return $query;
     }
 

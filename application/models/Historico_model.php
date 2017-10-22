@@ -15,4 +15,14 @@ class Historico_model extends CI_Model
         }
     }
 
+    public function getHistoricoByIdTipo($id=NULL, $tipo=NULL){
+        if($id != NULL && $tipo !== NULL){
+            $query = $this->db->where('id_produto', $id)
+            ->where('tipo', $tipo)
+            ->order_by('data desc')
+            ->get('historico');
+            return $query->result();
+        }
+    }
+
 }
