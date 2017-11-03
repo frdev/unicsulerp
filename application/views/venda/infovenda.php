@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="row">
 		<div class="col-12">
 			<?php
-			if($venda->status == 1){
+			if($venda->status == 1 && $this->session->userdata('nome_departamento') == 'ESTOQUE'){
 			?>
 				<form method="post" action="<?=base_url('vendas/aprovarvenda');?>">
 					<input type="hidden" id="id" name="id" value="<?=$venda->id?>" />

@@ -41,12 +41,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<?php
 							if($fornecedor->status == 'Ativo')
 							{
-								echo "<option value='Ativo' selected>Ativo</option>";
-								echo "<option value='Inativo'>Inativo</option>";
+								echo "<option value='1' selected>Ativo</option>";
+								echo "<option value='0'>Inativo</option>";
 							} else 
 							{
-								echo "<option value='Ativo'>Ativo</option>";
-								echo "<option value='Inativo' selected>Inativo</option>";
+								echo "<option value='1'>Ativo</option>";
+								echo "<option value='0' selected>Inativo</option>";
 							}
 						?>
 					</select>

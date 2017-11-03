@@ -49,7 +49,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<input type="reset" class="btn btn-light" value="Limpar">
 							</form>
 						</div>
-					</div>
+
+                        <?php
+                            if($this->session->has_userdata('login')){
+                                echo '</div><div class="text-center alert alert-danger"><span>';
+                                echo $this->session->userdata('login');
+                                echo '</span></div>';
+                                $this->session->unset_userdata('login');
+                            }
+                        ?>
+                    </span>
+                </div>
 				</div>
 				<div class="col-4"></div>
 			</div>

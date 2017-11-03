@@ -110,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<select class="form-control" id="fornecedor" name="fornecedor" required>
 							<option value=""></option>
 							<?php
-								foreach($fornecedores as $f):
+								foreach($fornecedoresAtivos as $f):
 									echo "<option value='" . $f->id . "'>" . $f->fantasia . "</option>";
 								endforeach;
 							?>

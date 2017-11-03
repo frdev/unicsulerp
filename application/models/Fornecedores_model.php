@@ -45,4 +45,11 @@ class Fornecedores_model extends CI_Model
 		}
 	}
 
+	public function getFornecedoresAtivos(){
+		$query = $this->db->where('status', 1)
+		->get('fornecedores')
+		->result();
+		return $query;
+	}
+
 }

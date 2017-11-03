@@ -25,7 +25,7 @@ class MateriasPrima extends CI_Controller
 			$this->load->model('materiasprima_model', 'materias');
 			$dados['id_armazem'] = $this->input->post('armazem');
 			$dados['tipo'] = 0;
-			$dados['descricao'] = $this->input->post('descricao');
+			$dados['descricao'] = strtoupper($this->input->post('descricao'));
 			$dados['valor'] = $this->input->post('preco');
 			$dados['qtd'] = $this->input->post('qtd');
 			$dados['qtdmin'] = $this->input->post('qtdmin');
@@ -33,9 +33,11 @@ class MateriasPrima extends CI_Controller
 			$dados['acionamento'] = $this->input->post('acionamento');
 
 			if($this->input->post('id') != NULL){
+				$this->session->set_userdata('materia', 'Matéria-prima '. $dados['descricao'] .' editada com sucesso.');
 				$this->materias->editMateria($dados, $this->input->post('id'));
 				redirect($url);
 			} else {
+				$this->session->set_userdata('materia', 'Matéria-prima '. $dados['descricao'] .' inserida com sucesso.');
 				$this->materias->addMateria($dados);
 				redirect($url);
 			}
@@ -51,6 +53,7 @@ class MateriasPrima extends CI_Controller
 		$dados['materia'] = $this->materias->getMateriaById($id);
 		if($dados['materia'] == NULL)
 		{
+			$this->session->set_userdata('materia', 'Informações da Matéria-prima não encontradas, selecione novamente.');
 			redirect(base_url('materiasprima/listarmaterias'));
 		}
 		$this->load->model('armazens_model', 'armazens');
@@ -65,7 +68,9 @@ class MateriasPrima extends CI_Controller
 			redirect(base_url('materiasprima/listarmaterias'));
 		}
 		$this->load->model('materiasprima_model', 'materias');
+		$dados = $this->materias->getMateriaById($id);
 		$this->materias->deleteMateria($id);
+		$this->session->set_userdata('materia', 'Matéria-prima '. $dados->descricao .' excluída com sucesso.');
 		redirect(base_url('materiasprima/listarmaterias'));
 	}
 
@@ -90,7 +95,7 @@ class MateriasPrima extends CI_Controller
 			$this->load->model('materiasprima_model', 'materiasprima');
 			$dados['id_armazem'] = $this->input->post('armazem');
 			$dados['tipo'] = 1;
-			$dados['descricao'] = $this->input->post('descricao');
+			$dados['descricao'] = strtoupper($this->input->post('descricao'));
 			$dados['valor'] = $this->input->post('preco');
 			$dados['qtd'] = $this->input->post('qtd');
 			$dados['qtdmin'] = $this->input->post('qtdmin');
@@ -99,9 +104,11 @@ class MateriasPrima extends CI_Controller
 
 			if($this->input->post('id') != NULL){
 				$this->materiasprima->updateConsumo($dados, $this->input->post('id'));
+				$this->session->set_userdata('consumo', 'Consumo '. $dados['descricao'] .' editado com sucesso.');
 				redirect($url);
 			} else {
 				$this->materiasprima->addConsumo($dados);
+				$this->session->set_userdata('consumo', 'Consumo '. $dados['descricao'] .' inserido com sucesso.');
 				redirect($url);
 			}
 		}
@@ -109,6 +116,7 @@ class MateriasPrima extends CI_Controller
 
 	public function editarconsumo($id=NULL){
 		if($id == NULL){
+			$this->session->set_userdata('consumo', 'Informações do Consumo não encontradas, selecione novamente.');
 			redirect(base_url('materiasprima/listarconsumos'));
 		}
 		$this->load->model('materiasprima_model', 'materias');
@@ -125,13 +133,16 @@ class MateriasPrima extends CI_Controller
 			redirect(base_url('materiasprima/listarconsumos'));
 		}
 		$this->load->model('materiasprima_model', 'materias');
+		$dados = $this->materias->getConsumoById($id);
 		$this->materias->deleteConsumo($id);
+		$this->session->set_userdata('consumo', 'Consumo '. $dados->descricao .' excluído com sucesso.');
 		redirect(base_url('materiasprima/listarconsumos'));
 	}
 
 	public function infomateria($id=NULL){
 		$url = base_url('materiasprima/listarmaterias');
 		if($id==NULL){
+			$this->session->set_userdata('materia', 'Informações da Matéria-prima não encontradas, selecione novamente.');
 			redirect($url);
 		}
 
@@ -146,7 +157,7 @@ class MateriasPrima extends CI_Controller
 			$dados['produto'] = $query;
 			$dados['historico'] = $this->historico->getHistoricoByIdTipo($id, 1);
 			$this->load->view('menu');
-			$this->load->view('consumo/infoconsumo', $dados);
+			$this->load->view('materiasprima/infomateria', $dados);
 			$this->load->view('rodape');
 		}
 	}
@@ -154,6 +165,7 @@ class MateriasPrima extends CI_Controller
 	public function infoconsumo($id=NULL){
 		$url = base_url('materiasprima/listarmaterias');
 		if($id==NULL){
+			$this->session->set_userdata('consumo', 'Informações do Consumo não encontradas, selecione novamente.');
 			redirect($url);
 		}
 

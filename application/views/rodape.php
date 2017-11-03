@@ -3,7 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 	<footer class="footer">
       <div class="container-fluid">
-        <span class="text-muted">Projeto - Controle de Estoque - Unicsul 2017</span>
+        <span class="text-muted">Projeto - Controle de Estoque - Unicsul 2017 - Usuário Logado:
+          <?php
+              echo $this->session->userdata('nome');
+          ?>
+        </span>
       </div>
     </footer>
     <!-- Optional JavaScript -->

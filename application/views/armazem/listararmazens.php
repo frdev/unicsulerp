@@ -32,6 +32,16 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			</div>
 		</form>
 	</div>
+	<div class="text-center">
+			<?php
+				if($this->session->has_userdata('armazem')){
+					echo "<span class='text-success'><strong>";
+					echo $this->session->userdata('armazem');
+					echo "</strong></span>";
+					$this->session->unset_userdata('armazem');
+				}
+			?>
+	</div>
 	<hr>
 </div>
 <div class="container">

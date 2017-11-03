@@ -23,6 +23,7 @@ class Vendas extends CI_Controller
 		$dados['id_produto'] = $this->input->post('id_produto');
 		$dados['qtd'] = $this->input->post('qtd');
 		$dados['datasolicitacao'] = $data;
+		$this->session->set_userdata('venda', 'Venda cadastrada com sucesso, aguardando aprovação.');
 		$this->vendas->addVendas($dados);
 		redirect($url);
 	}
@@ -33,6 +34,7 @@ class Vendas extends CI_Controller
 
 		if($id == NULL)
 		{
+			$this->session->set_userdata('venda', 'Solicitação de Venda não encontrada.');
 			redirect($url);
 		}
 
@@ -41,6 +43,7 @@ class Vendas extends CI_Controller
 
 		if($query == NULL)
 		{
+			$this->session->set_userdata('venda', 'Solicitação de Venda não encontrada.');
 			redirect($url);
 		}
 
@@ -62,6 +65,7 @@ class Vendas extends CI_Controller
 
 		if($id == NULL)
 		{
+			$this->session->set_userdata('venda', 'Solicitação de Venda não encontrada.');
 			redirect($url);
 		}
 
@@ -70,10 +74,12 @@ class Vendas extends CI_Controller
 
 		if($query == NULL)
 		{
+			$this->session->set_userdata('venda', 'Solicitação de Venda não encontrada.');
 			redirect($url);
 		}
 
 		$this->vendas->cancelaVenda($id);
+		$this->session->set_userdata('venda', 'Solicitação de Venda '.$query->id.' cancelada com sucesso.');
 		redirect($url);
 
 	}
@@ -100,6 +106,7 @@ class Vendas extends CI_Controller
         $dadoshistorico['tipo_movimentacao'] = 1;
         $dadoshistorico['data'] = date('Y-m-d');
         $this->historico->addHistorico($dadoshistorico);
+        $this->session->set_userdata('venda', 'Solicitação de Venda '.$query->id.' aprovada com sucesso.');
 		redirect($url);
 	}
 

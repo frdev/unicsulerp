@@ -8,6 +8,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<a class="btn btn-primary" data-toggle="collapse" href="#testeCollapse" aria-expanded="false" aria-controls="testeCollapse">Nova Venda</a>
 	</p>
 	<h1 class="text-center">Solicitações de Vendas</h1>
+	<div class="text-center">
+		<?php
+			if($this->session->has_userdata('venda')){
+				echo '<span><strong>'.$this->session->userdata('venda').'</strong></span>';
+				$this->session->unset_userdata('venda');
+			}
+		?>
+	</div>
 	<div class="collapse" id="testeCollapse">
 		<hr>
 		<form id="form_venda" action="<?=base_url('vendas/salvar');?>" method="post">

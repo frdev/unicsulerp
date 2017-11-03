@@ -23,6 +23,16 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			</div>
 		</form>
 	</div>
+	<div class="text-center">
+		<?php
+			if($this->session->has_userdata('departamento')){
+				echo "<span class='text-success'><strong>";
+				echo $this->session->userdata('departamento');
+				echo "</strong></span>";
+				$this->session->unset_userdata('departamento');
+			}
+		?>
+	</div>
 	<hr>
 	<div class="row">
 		<div class="col-3"></div>

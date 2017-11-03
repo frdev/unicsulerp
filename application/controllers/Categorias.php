@@ -25,11 +25,13 @@ class Categorias extends CI_Controller
 		$result = $this->categorias->getCategoriaById($this->input->post('id'));
 		if($result != NULL)
 		{
+			$this->session->set_userdata('categoria', 'Erro ao inserir.');
 			redirect(base_url('categorias/index'));
 		}
 		$dados['id_setor'] = $this->input->post('setor');
-		$dados['descricao'] = $this->input->post('descricao');
+		$dados['descricao'] = strtoupper($this->input->post('descricao'));
 		$this->categorias->addCategoria($dados);
+		$this->session->set_userdata('categoria', 'Categoria '.$dados['descricao'].' inserida com sucesso.');
 		redirect(base_url('categorias/index'));
 	}
 
@@ -43,8 +45,10 @@ class Categorias extends CI_Controller
 		$result = $this->categorias->getCategoriaById($id);
 		if($result == NULL)
 		{
+			$this->session->set_userdata('categoria', 'Erro ao excluir.');
 			redirect(base_url('categorias/index'));
 		}
+		$this->session->set_userdata('categoria', 'Categoria '.$result->descricao.' excluída com sucesso.');
 		$this->categorias->deleteCategoria($id);
 		redirect(base_url('categorias/index'));
 	}
@@ -72,12 +76,14 @@ class Categorias extends CI_Controller
 	{
 		if($this->input->post('descricao') == NULL || $this->input->post('setor') == NULL)
 		{
+			$this->session->set_userdata('categoria', 'Não é possível cadastrar categoria sem descrição ou setor.');
 			redirect(base_url('categorias/index'));
 		}
 		$this->load->model('categorias_model', 'categorias');
 		$dados['id_setor'] = $this->input->post('setor');
-		$dados['descricao'] = $this->input->post('descricao');
+		$dados['descricao'] = strtoupper($this->input->post('descricao'));
 		$this->categorias->updateCategoria($dados, $this->input->post('id'));
+		$this->session->set_userdata('categoria', 'Categoria '.$dados['descricao'].' editada com sucesso.');
 		redirect(base_url('categorias/index'));
 	}
 

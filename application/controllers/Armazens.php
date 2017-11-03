@@ -19,12 +19,14 @@ class Armazens extends CI_Controller
 		$tipoarmazem = $this->input->post('tipoarmazem');
 		if($descricao != NULL && $tipoarmazem != NULL)
 		{
-			$dados['descricao'] = $descricao;
+			$dados['descricao'] = strtoupper($descricao);
 			$dados['tipoarmazem'] = $tipoarmazem;
 		} else 
 		{
+			$this->session->set_userdata('armazem', 'Não é possível registrar um Armazém sem descrição ou preendimento do tipo de armazém.');
 			redirect(base_url('armazens/index'));
 		}
+		$this->session->set_userdata('armazem', 'Armazém '.$dados['descricao'].' cadastrado com sucesso.');
 		$this->load->model('armazens_model', 'armazens');
 		$this->armazens->inserirArmazem($dados);
 		redirect(base_url('armazens/index'));
@@ -34,6 +36,7 @@ class Armazens extends CI_Controller
 	{
 		if($id == NULL)
 		{
+			$this->session->set_userdata('armazem', 'Erro ao buscar informações do armazém informado, selecione novamente.');
 			redirect(base_url('armazens'));
 		}
 
@@ -43,9 +46,9 @@ class Armazens extends CI_Controller
 
 		if($query == NULL)
 		{
+			$this->session->set_userdata('armazem', 'Erro ao buscar informações do armazém informado, selecione novamente.');
 			redirect(base_url('armazens/index'));
 		}
-
 		$dados['armazem'] = $query;
 		$this->load->view("menu");
 		$this->load->view("armazem/editararmazem", $dados);
@@ -56,12 +59,14 @@ class Armazens extends CI_Controller
 	{
 		if($this->input->post('descricao') == NULL || $this->input->post('tipoarmazem') == NULL)
 		{
+			$this->session->set_userdata('armazem', 'Não é possível editar o Armazém se os campos não estiverem preenchidos.');
 			redirect(base_url('armazens/index'));
 		}
-		$data['descricao'] = $this->input->post('descricao');
+		$data['descricao'] = strtoupper($this->input->post('descricao'));
 		$data['tipoarmazem'] = $this->input->post('tipoarmazem');
 		$this->load->model("armazens_model", "armazens");
 		$query = $this->armazens->editArmazem($data, $this->input->post('id'));
+		$this->session->set_userdata('armazem', 'Armazém '.$data['descricao'].' editado com sucesso.');
 		redirect(base_url('armazens/index'));
 	}
 
@@ -72,7 +77,9 @@ class Armazens extends CI_Controller
 			redirect(base_url('armazens/index'));
 		}
 		$this->load->model("armazens_model", "armazens");
+		$armazem = $this->armazens->getArmazemById($id);
 		$this->armazens->apagarArmazem($id);
+		$this->session->set_userdata('armazem', 'Armazém '.$armazem->descricao.' excluído com sucesso.');
 		redirect(base_url('armazens/index'));
 	}
 

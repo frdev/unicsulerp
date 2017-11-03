@@ -1,5 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+  defined('BASEPATH') OR exit('No direct script access allowed');
+  if(!$this->session->has_userdata('logado')){
+    $this->session->set_userdata('login', 'Necessário realizar login para acessar o sistema.');
+    redirect();
+  }
 ?>
 
 <html lang="en">
@@ -37,30 +41,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          <?php if($this->session->userdata('nome_departamento') == 'ESTOQUE'){?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Estoque</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="<?=base_url('usuarios/listarusuarios')?>">Usuários</a>
-              <a class="dropdown-item" href="<?=base_url('produtos/listarprodutos')?>">Estoque</a>
-              <a class="dropdown-item" href="<?=base_url('categorias/index')?>">Categorias de Produto</a>
-              <a class="dropdown-item" href="<?=base_url('setores/index')?>">Setores</a>
-              <a class="dropdown-item" href="<?=base_url('armazens/index')?>">Armazéns</a>
-              <a class="dropdown-item" href="<?=base_url('fornecedores/index')?>">Fornecedores</a>
-              <a class="dropdown-item" href="<?=base_url('departamentos/index')?>">Departamentos</a>
+                <?php if($this->session->userdata('permissao') == 10){ ?>
+                  <a class="dropdown-item" href="<?=base_url('usuarios/listarusuarios')?>">Usuários</a>
+                  <?php } ?>
+                  <a class="dropdown-item" href="<?=base_url('produtos/listarprodutos')?>">Estoque</a>
+                  <a class="dropdown-item" href="<?=base_url('categorias/index')?>">Categorias de Produto</a>
+                  <a class="dropdown-item" href="<?=base_url('setores/index')?>">Setores</a>
+                  <a class="dropdown-item" href="<?=base_url('armazens/index')?>">Armazéns</a>
+                  <a class="dropdown-item" href="<?=base_url('fornecedores/index')?>">Fornecedores</a>
+                  <?php if($this->session->userdata('permissao') == 10){ ?>
+                  <a class="dropdown-item" href="<?=base_url('departamentos/index')?>">Departamentos</a>
+                <?php } ?>
             </div>
           </li>
+          <?php } ?>
+          <?php if($this->session->userdata('nome_departamento') == 'COMPRAS' || ($this->session->userdata('nome_departamento') == 'ESTOQUE' && $this->session->userdata('permissao') == 10)){?>
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('compras/index')?>">Compras</a>
           </li>
+          <?php } ?>
+          <?php if($this->session->userdata('nome_departamento') == 'VENDAS' || ($this->session->userdata('nome_departamento') == 'ESTOQUE' && $this->session->userdata('permissao') == 10)){?>
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('vendas/index')?>">Vendas</a>
           </li>
+          <?php } ?>
+          <?php if($this->session->userdata('nome_departamento') == 'PRODUCAO' || ($this->session->userdata('nome_departamento') == 'ESTOQUE' && $this->session->userdata('permissao') == 10)){?>
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('producoes/index')?>">Produções</a>
           </li>
+          <?php } ?>
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('reposicoes/index')?>">Reposições de Usuários</a>
-          </li>
+          </li> 
           <li class="nav-item">
             <a class="nav-link" href="<?=base_url('login/logout');?>">Sair</a>
           </li>

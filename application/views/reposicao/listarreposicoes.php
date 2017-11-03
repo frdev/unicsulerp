@@ -44,8 +44,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</form>
 	</div>
 	<h1 class="text-center">Solicitações de Usuários</h1>
+	<div class="text-center">
+		<?php
+		    if($this->session->has_userdata('reposicao')){
+		        echo "<span class='text-success'><strong>";
+		        echo $this->session->userdata('reposicao');
+		        echo "</strong></span>";
+		        $this->session->unset_userdata('reposicao');
+		 	}
+		?>
+	</div>
 	<hr>
-
 	<table class="table table-bordered">
 		<thead class="table-inverse">
 			<tr>

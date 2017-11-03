@@ -76,6 +76,16 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					</div>
 				</form>
 			</div>
+			<div class="text-center">
+				<?php
+					if($this->session->has_userdata('materia')){
+						echo "<span class='text-success'><strong>";
+						echo $this->session->userdata('materia');
+						echo "</strong></span>";
+						$this->session->unset_userdata('materia');
+					}
+				?>
+			</div>
 			<hr>
 			<table class="table table-bordered">
 				<thead class="table-inverse">

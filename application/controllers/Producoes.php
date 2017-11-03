@@ -20,11 +20,13 @@ class Producoes extends CI_Controller
         $dados['datasolicitacao'] = date('Y-m-d');
         $this->load->model('producoes_model', 'producoes');
         $this->producoes->addProducao($dados);
+        $this->session->set_userdata('producao', 'Solicitação de Produção realizada com sucesso.');
         redirect(base_url('producoes/index'));
     }
 
     public function info($id=NULL){
         if($id == NULL){
+            $this->session->set_userdata('producao', 'Informações da Solicitação de Produção não encontradas, selecione novamente.');
             redirect(base_url('producoes/index'));
         }
         $this->load->model('producoes_model', 'producoes');
@@ -43,6 +45,7 @@ class Producoes extends CI_Controller
         $this->load->model('producoes_model', 'producoes');
         $data = date('Y-m-d');
         $this->producoes->aprovarProducao($id, $data);
+        $this->session->set_userdata('producao', 'Solicitação de Produção '.$id.' aprovada com sucesso, aguardando recebimento do produto.');
         redirect(base_url('producoes/index'));
     }
 
@@ -66,6 +69,7 @@ class Producoes extends CI_Controller
         $dadoshistorico['valor'] = 0;
         $dadoshistorico['tipo_movimentacao'] = 3;
         $dadoshistorico['data'] = date('Y-m-d');
+        $this->session->set_userdata('producao', 'Recebida entrega da Solicitação de Produção '.$id.'.');
         redirect(base_url('producoes/index'));
     }
 

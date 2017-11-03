@@ -25,4 +25,13 @@ class Historico_model extends CI_Model
         }
     }
 
+    public function getHistoricoFornecedor($id=NULL){
+        if($id != NULL){
+            $query = $this->db->where('id_fornecedor', $id)
+            ->order_by('data desc')
+            ->get('historico');
+            return $query->result();
+        }
+    }
+
 }

@@ -50,9 +50,10 @@ class Usuarios_model extends CI_Model
 		{
 			$this->db->where('usuario', $usuario);
 			$this->db->where('senha', $senha);
+			$this->db->where('status', 1);
 			$this->db->limit(1);
 			$query = $this->db->get('usuarios');
-			return $query->result();
+			return $query->row_array();
 		}
 	}
 

@@ -18,25 +18,27 @@ class Fornecedores extends CI_Controller
 		$url = base_url('fornecedores/index');
 		$this->load->model('fornecedores_model', 'fornecedores');
 		$dados['cnpj'] = $this->input->post('cnpj');
-		$dados['razaosocial'] = $this->input->post('razao');
-		$dados['fantasia'] = $this->input->post('fantasia');
-		$dados['responsavel'] = $this->input->post('responsavel');
+		$dados['razaosocial'] = strtoupper($this->input->post('razao'));
+		$dados['fantasia'] = strtoupper($this->input->post('fantasia'));
+		$dados['responsavel'] = strtoupper($this->input->post('responsavel'));
 		$dados['telefone'] = $this->input->post('telefone');
 		$dados['email'] = $this->input->post('email');
 		$dados['cep'] = $this->input->post('cep');
-		$dados['logradouro'] = $this->input->post('logradouro');
+		$dados['logradouro'] = strtoupper($this->input->post('logradouro'));
 		$dados['numero'] = $this->input->post('numero');
-		$dados['complemento'] = $this->input->post('complemento');
-		$dados['cidade'] = $this->input->post('cidade');
-		$dados['uf'] = $this->input->post('estado');
+		$dados['complemento'] = strtoupper($this->input->post('complemento'));
+		$dados['cidade'] = strtoupper($this->input->post('cidade'));
+		$dados['uf'] = strtoupper($this->input->post('estado'));
 		if($this->input->post('id') != NULL)
 		{
+			$this->session->set_userdata('fornecedor', 'Fornecedor '. $dados['fantasia'] .' editado com sucesso.');
 			$dados['status'] = $this->input->post('status');
 			$this->fornecedores->editFornecedor($this->input->post('id'), $dados);
 			redirect($url);
 		} else 
 		{
 			$this->fornecedores->addFornecedor($dados);
+			$this->session->set_userdata('fornecedor', 'Fornecedor '. $dados['fantasia'] .' inserido com sucesso.');
 			redirect($url);
 		}
 	}
@@ -47,19 +49,25 @@ class Fornecedores extends CI_Controller
 
 		if($id == NULL)
 		{
+			$this->session->set_userdata('fornecedor', 'Erro ao buscar informações do Fornecedor, selecione novamente.');
 			redirect($url);
 		}
 
+		$this->load->model('historico_model', 'historico');
 		$this->load->model('fornecedores_model', 'fornecedores');
+		$this->load->model('materiasprima_model', 'materias');
 
 		$query = $this->fornecedores->getFornecedorByID($id);
 
 		if($query == NULL)
 		{
+			$this->session->set_userdata('fornecedor', 'Erro ao buscar informações do Fornecedor, selecione novamente.');
 			redirect($url);
 		}
 
 		$dados['fornecedor'] = $query;
+		$dados['historico']  = $this->historico->getHistoricoFornecedor($id);
+		$dados['materias']   = $this->materias->getAll();
 
 		$this->load->view('menu');
 		$this->load->view('fornecedor/infofornecedor', $dados);
@@ -73,6 +81,7 @@ class Fornecedores extends CI_Controller
 
 		if($id == NULL)
 		{
+			$this->session->set_userdata('fornecedor', 'Erro ao buscar informações do Fornecedor, selecione novamente.');
 			redirect($url);
 		}
 
@@ -81,6 +90,7 @@ class Fornecedores extends CI_Controller
 
 		if($query == NULL)
 		{
+			$this->session->set_userdata('fornecedor', 'Erro ao buscar informações do Fornecedor, selecione novamente.');
 			redirect($url);
 		}
 
@@ -96,6 +106,7 @@ class Fornecedores extends CI_Controller
 		$url = base_url('fornecedores/listarfornecedores');
 		if($id == NULL)
 		{
+			$this->session->set_userdata('fornecedor', 'Erro ao buscar informações do Fornecedor, selecione novamente.');
 			redirect($url);
 		} 
 
@@ -105,10 +116,12 @@ class Fornecedores extends CI_Controller
 
 		if($query == NULL)
 		{
+			$this->session->set_userdata('fornecedor', 'Erro ao buscar informações do Fornecedor, selecione novamente.');
 			redirect($url);
 		} else 
 		{
 			$this->fornecedores->apagarFornecedor($id);
+			$this->session->set_userdata('fornecedor', 'Fornecedor ' . $query->fantasia . ' apagado com sucesso.');
 			redirect($url);
 		}
 

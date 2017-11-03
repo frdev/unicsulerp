@@ -58,13 +58,25 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					</select>
 				</div>
 			</div>
-			<div class="col-4">
-				<div class="form-group col-md-4" style="margin-top: 2.5%;">
-					<input type="submit" class="btn btn-md btn-success" value="Cadastrar"/>
-					<input type="reset" class="btn btn-md btn-light" value="Limpar"/>
-				</div> 
+			<div class="row">
+				<div class="col-4">
+					<div class="form-group col-md-4" style="margin-top: 2.5%;">
+						<input type="submit" class="btn btn-md btn-success" value="Cadastrar"/>
+						<input type="reset" class="btn btn-md btn-light" value="Limpar"/>
+					</div> 
+				</div>
 			</div>
 		</form>
+	</div>
+	<div class="text-center">
+			<?php
+				if($this->session->has_userdata('usuario')){
+					echo "<span class='text-success'><strong>";
+					echo $this->session->userdata('usuario');
+					echo "</strong></span>";
+					$this->session->unset_userdata('usuario');
+				}
+			?>
 	</div>
 	<hr>
 	<table class="table table-bordered">

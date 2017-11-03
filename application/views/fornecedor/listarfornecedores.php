@@ -74,6 +74,14 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			</div>
 		</form>
 	</div>
+	<?php
+			if($this->session->has_userdata('fornecedor')){
+				echo "<span class='text-success'><strong>";
+				echo $this->session->userdata('fornecedor');
+				echo "</strong></span>";
+				$this->session->unset_userdata('fornecedor');
+			}
+		?>
 	<hr>
 	<table class="table table-bordered">
 		<thead class="table-inverse">
@@ -93,7 +101,15 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 				<td class='text-center'><?=$fornecedor->cnpj;?></td>
 				<td class='text-center'><?=$fornecedor->razaosocial;?></td>
 				<td class='text-center'><?=$fornecedor->fantasia;?></td>
-				<td class='text-center'><?=$fornecedor->status;?></td>
+				<td class='text-center'>
+					<?php
+						if($fornecedor->status == 0){
+							echo 'Inativo';
+						} else {
+							echo 'Ativo';
+						}
+					?>						
+				</td>
 				<td class='text-center'>
 				<a class="btn btn-sm btn-primary" href="<?=base_url('/fornecedores/info/' . $fornecedor->id)?>"><i class="fa fa-info" aria-hidden="true"></i></a>
 				<a class="btn btn-sm btn-warning" href="<?=base_url('/fornecedores/editar/' . $fornecedor->id)?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>

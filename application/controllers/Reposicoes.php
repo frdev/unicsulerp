@@ -25,6 +25,7 @@ class Reposicoes extends CI_Controller
 		$dados['qtd'] = $this->input->post('qtd');
 		$dados['datasolicitacao'] = date('Y-m-d');
 		$this->load->model("reposicoes_model", "reposicoes");
+		$this->session->set_userdata('produto', 'Solicitação de Reposição realizada com sucesso.');
 		$this->reposicoes->inserirReposicao($dados);
 		redirect('reposicoes/index');		
 	}
@@ -47,6 +48,7 @@ class Reposicoes extends CI_Controller
 	{
 		if($id == NULL)
 		{
+			$this->session->set_userdata('produto', 'Solicitação de Reposição não encontrada, selecione novamente.');
 			redirect(base_url('reposicoes/index'));
 		}
 		$this->load->model('reposicoes_model', 'reposicoes');
@@ -67,15 +69,19 @@ class Reposicoes extends CI_Controller
         $dadoshistorico['tipo_movimentacao'] = 2;
         $dadoshistorico['data'] = date('Y-m-d');
         $this->historico->addHistorico($dadoshistorico);
+        $this->session->set_userdata('produto', 'Solicitação de Reposição '.$id.' realizada.');
 		redirect(base_url('reposicoes/index'));
 	}
 
 	public function cancelar($id=NULL){
 		if($id == NULL){
+			$this->session->set_userdata('produto', 'Solicitação de Reposição não encontrada, selecione novamente.');
 			redirect(base_url('reposicoes/index'));
 		}
 		$this->load->model('reposicoes_model', 'reposicoes');
+		$reposicao = $this->reposicoes->getReposicaoById($id);
 		$this->reposicoes->cancelarReposicao($id);
+		$this->session->set_userdata('produto', 'Solicitação de Reposição '.$reposicao->id.' cancelada.');
 		redirect(base_url('reposicoes/index'));
 	}
 

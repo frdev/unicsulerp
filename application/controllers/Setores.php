@@ -17,11 +17,13 @@ class Setores extends CI_Controller
 	{
 		if($this->input->post('descricao') == NULL)
 		{
+			$this->session->set_userdata('setor', 'Não é possível registrar um Armazém sem descrição.');
 			redirect('setores/index');
 		}
-		$dados['descricao'] = $this->input->post('descricao');
+		$dados['descricao'] = strtoupper($this->input->post('descricao'));
 		$this->load->model('setores_model', 'setores');
 		$this->setores->addSetor($dados);
+		$this->session->set_userdata('setor', 'Setor '.$dados['descricao'].' inserido com sucesso.');
 		redirect('setores/index');
 	}
 
@@ -32,11 +34,13 @@ class Setores extends CI_Controller
 			redirect('armazens/index');
 		}
 		$this->load->model('setores_model', 'setores');
-		if($this->setores->getSetorUnico($id) == NULL)
+		$setor = $this->setores->getSetorUnico($id);
+		if($setor == NULL)
 		{
 			redirect('setores/index');
 		}
 		$this->setores->deleteSetor($id);
+		$this->session->set_userdata('setor', 'Setor '.$dados['descricao'].' excluído com sucesso.');
 		redirect('setores/index');
 	}
 
@@ -44,11 +48,13 @@ class Setores extends CI_Controller
 	{
 		if($id == NULL)
 		{
+			$this->session->set_userdata('setor', 'Setor não encontrado, selecione novamente.');
 			redirect('setores/index');
 		}
 		$this->load->model('setores_model', 'setores');
 		if($this->setores->getSetorUnico($id) == NULL)
 		{
+			$this->session->set_userdata('setor', 'Setor não encontrado, selecione novamente.');
 			redirect('setores/index');
 		}
 		$dados['setor'] = $this->setores->getSetorUnico($id);
@@ -61,11 +67,13 @@ class Setores extends CI_Controller
 	{
 		if($this->input->post('descricao') == NULL)
 		{
+			$this->session->set_userdata('setor', 'Erro ao editar Setor, campo descrição estava vazio.');
 			redirect('setores/index');
 		}	
-		$dados['descricao'] = $this->input->post('descricao');
+		$dados['descricao'] = strtoupper($this->input->post('descricao'));
 		$this->load->model('setores_model', 'setores');
 		$this->setores->updateSetor($dados, $this->input->post('id'));
+		$this->session->set_userdata('setor', 'Setor '.$dados['descricao'].' editado com sucesso.');
 		redirect('setores/index');
 	}
 

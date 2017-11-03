@@ -30,10 +30,12 @@ class Usuarios extends CI_Controller
 			$dados['permissao'] = $this->input->post('permissao');
 			$dados['status'] = $this->input->post('status');
 			if($this->input->post('id') != NULL){
+				$this->session->set_userdata('usuario', 'Usuário '.$dados['nome'].' alterado com sucesso');
 				$this->usuarios->editUsuario($dados, $this->input->post('id'));
 				redirect($url);
 			} else {
 				if($this->usuarios->checkUsuario($dados) < 1){				
+					$this->session->set_userdata('usuario', 'Usuário '.$dados['nome'].' criado com sucesso');
 					$this->usuarios->addUsuario($dados);
 					redirect($url);
 				} else {
@@ -82,6 +84,7 @@ class Usuarios extends CI_Controller
 
 		if($query != NULL)
 		{
+			$this->session->set_userdata('usuario', 'Usuário '.$query->nome.' apagado com sucesso');
 			$this->usuarios->apagarUsuario($id);
 			redirect($url);
 		} else {

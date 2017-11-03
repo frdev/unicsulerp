@@ -15,17 +15,17 @@ class Departamentos extends CI_Controller
 
 	public function salvar()
 	{
-
 		$descricao = $this->input->post('descricao');
 		if($descricao != NULL)
 		{
-			$dados['descricao'] = $descricao;
+			$dados['descricao'] = strtoupper($descricao);
 		} else {
+			$this->session->set_userdata('departamento', 'Descrição do Departamento não pode conter valores vazios.');
 			redirect(base_url('departamentos/index'));
 		}
-
 		$this->load->model('departamentos_model', 'departamentos');
 		$this->departamentos->inserirDepartamento($dados);
+		$this->session->set_userdata('departamento', 'Departamento '.$dados['descricao'].' inserido com sucesso');
 		redirect(base_url('departamentos/index'));
 	}
 
@@ -43,6 +43,7 @@ class Departamentos extends CI_Controller
 		if($query == NULL)
 		{
 			redirect(base_url('departamentos/index'));
+			$this->session->set_userdata('departamento', 'Erro ao carregar informações do projeto, selecione novamente.');
 		}
 
 		$dados['departamento'] = $query;
@@ -55,11 +56,13 @@ class Departamentos extends CI_Controller
 	{
 		if($this->input->post('descricao') == NULL)
 		{
+			$this->session->set_userdata('departamento', 'Não é possível salvar a edição do departamento sem uma Descrição do mesmo.');
 			redirect(base_url('departamentos/index'));
 		}
-		$data['descricao'] = $this->input->post('descricao');
+		$data['descricao'] = strtoupper($this->input->post('descricao'));
 		$this->load->model("departamentos_model", "departamentos");
 		$query = $this->departamentos->editDepartamento($data, $this->input->post('id'));
+		$this->session->set_userdata('departamento', 'Departamento ' . $data['descricao'] . ' editado com sucesso.');
 		redirect(base_url('departamentos/index'));
 	}
 
@@ -70,7 +73,9 @@ class Departamentos extends CI_Controller
 			redirect(base_url('departamentos/index'));
 		}
 		$this->load->model("departamentos_model", "departamentos");
+		$departamento = $this->departamentos->getDepartamentoById($id);
 		$this->departamentos->apagarDepartamento($id);
+		$this->session->set_userdata('departamento', 'Departamento ' . $departamento->descricao . ' excluído com sucesso.');
 		redirect(base_url('departamentos/index'));
 	}
 
