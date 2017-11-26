@@ -40,7 +40,17 @@ class Login extends CI_Controller
 			$this->session->set_userdata('nome', $query['nome']);
 			$this->session->set_userdata('nome_departamento', $qd->descricao);
 			$this->session->set_userdata('logado', true);
-			redirect(base_url('produtos/listarprodutos'));
+			if($this->session->userdata('nome_departamento') == 'COMPRAS'){
+				redirect(base_url('compras/index'));
+			} else if ($this->session->userdata('nome_departamento') == 'VENDAS'){
+				redirect(base_url('vendas/index'));
+			} else if ($this->session->userdata('nome_departamento') == 'PRODUCAO'){
+				redirect(base_url('producoes/index'));
+			} else if ($this->session->userdata('nome_departamento') == 'ESTOQUE'){
+				redirect(base_url('produtos/listarprodutos'));
+			} else {
+				redirect(base_url('reposicoes/index'));
+			}
 		}
 	}
 
